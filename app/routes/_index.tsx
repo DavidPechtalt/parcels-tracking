@@ -1,19 +1,19 @@
 import type { MetaFunction } from "@remix-run/node";
 import type { Parcel } from "~/types/parcel";
-import parcels from "../data/parcels.json";
+import parcelsData from "../data/parcels.json";
 
 export const meta: MetaFunction = () => {
   return [
-    { title: "New Remix App" },
-    { name: "description", content: "Welcome to Remix!" },
+    { title: "Parcels Managment" },
+    { name: "description", content: "" },
   ];
 };
 
 export default function Index() {
- const rparcels = parcels as Parcel[]
+ const parcels = parcelsData as Parcel[]
   return (
     <div className="flex min-h-screen items-center justify-center bg-[#071333]">
-      { <Table parcels={rparcels} />}
+      { <Table parcels={parcels} />}
     </div>
   );
 }
@@ -46,8 +46,8 @@ export function Table({ parcels }: { parcels: Parcel[] }) {
           <div className="w-[100%]">Pick</div>
         </div>
       </div>
-      {parcels.map((parceli) => {
-        return <TableRow key={parceli.id} parcel={parceli} />
+      {parcels.map((parcel) => {
+        return <TableRow key={parcel.id} parcel={parcel} />
       })}
     </div>
   );
@@ -58,7 +58,7 @@ export function TableRow({parcel}: {parcel:Parcel}) {
     <div className="  min-w-[1450px] w-[1450px] max-w-[1450px] h-20 rounded-lg bg-white flex items-center px-4 text-gray-500 mb-1.5 overflow-x-hidden">
       <div className="flex items-center min-w-[214px]">
         <img
-          className="rounded-full h-9 "
+          className="rounded-full h-10 "
           src={parcel.resident.img.src}
           alt={parcel.resident.img.alt}
         ></img>
