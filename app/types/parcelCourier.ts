@@ -1,0 +1,23 @@
+export const CourierArr = [
+  "Amazon",
+  "Ebay",
+  "FedEx",
+  "UPS",
+  "DHL",
+  "AliExpress",
+  "USPS",
+  "Hermes",
+  "Yodel",
+  "Royal Mail",
+  "Canada Post",
+  "Australia Post",
+  "Aramex",
+  "TNT",
+  "GLS",
+  "Blue Dart",
+  "China Post",
+  "Japan Post",
+  "India Post",
+  "La Poste",
+] as const;
+export type ParcelCourier = (typeof CourierArr)[number];
