@@ -1,5 +1,5 @@
-export interface Unit{
-    id:string;
-    street:string;
-    number:string;
+export interface Unit {
+  id: string;
+  street: string;
+  number: string;
 }

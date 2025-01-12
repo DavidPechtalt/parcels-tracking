@@ -1,4 +1,3 @@
-
 import { ResidentProfileImg } from "./residnetProfileImg";
 import { Unit } from "./unit";
 

@@ -3,17 +3,14 @@ import type { Parcel } from "~/types/parcel";
 import parcelsData from "../data/parcels.json";
 
 export const meta: MetaFunction = () => {
-  return [
-    { title: "Parcels Managment" },
-    { name: "description", content: "" },
-  ];
+  return [{ title: "Parcels Managment" }, { name: "description", content: "" }];
 };
 
 export default function Index() {
- const parcels = parcelsData as Parcel[]
+  const parcels = parcelsData as Parcel[];
   return (
     <div className="flex min-h-screen items-center justify-center bg-[#071333]">
-      { <Table parcels={parcels} />}
+      {<Table parcels={parcels} />}
     </div>
   );
 }
@@ -21,7 +18,6 @@ export default function Index() {
 export function Table({ parcels }: { parcels: Parcel[] }) {
   return (
     <div className="w-[90%]   overflow-x-auto scrollbar py-3">
-     
       <div className="min-w-[1450px] flex w-[1450px] h-10 px-4  mb-4 text-white text-lg">
         {" "}
         <div className="flex items-center min-w-[214px] ">
@@ -47,13 +43,13 @@ export function Table({ parcels }: { parcels: Parcel[] }) {
         </div>
       </div>
       {parcels.map((parcel) => {
-        return <TableRow key={parcel.id} parcel={parcel} />
+        return <TableRow key={parcel.id} parcel={parcel} />;
       })}
     </div>
   );
 }
 
-export function TableRow({parcel}: {parcel:Parcel}) {
+export function TableRow({ parcel }: { parcel: Parcel }) {
   return (
     <div className="  min-w-[1450px] w-[1450px] max-w-[1450px] h-20 rounded-lg bg-white flex items-center px-4 text-gray-500 mb-1.5 overflow-x-hidden">
       <div className="flex items-center min-w-[214px]">
@@ -74,7 +70,13 @@ export function TableRow({parcel}: {parcel:Parcel}) {
       <div className="flex items-center  min-w-[214px]">{parcel.courier}</div>
       <div className="flex items-center  min-w-[214px]">{parcel.arrivedIn}</div>
       <div className="flex items-center  min-w-[214px]">
-        <div className={`rounded-xl ${parcel.status === "pending"?"bg-red-400":"bg-green-400"} px-4 py-0.5`}>{parcel.status}</div>
+        <div
+          className={`rounded-xl ${
+            parcel.status === "pending" ? "bg-red-400" : "bg-green-400"
+          } px-4 py-0.5`}
+        >
+          {parcel.status}
+        </div>
       </div>
       <div className="flex items-center min-w-[200px]">
         <button>
@@ -85,9 +87,3 @@ export function TableRow({parcel}: {parcel:Parcel}) {
     </div>
   );
 }
-
-
-
-
-
-
