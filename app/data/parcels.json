@@ -108,7 +108,7 @@
     "id": "c732daf4-1018-44ff-8a2c-cda5b6bfd132",
     "resident": {
       "id": "59e6afd9-f7e1-42b3-93ed-1ffe8d9d87d8",
-      "name": "Jacob Smith",
+      "name": "Jacob Smith", 
       "unit": {
         "id": "06e7b940-ad06-4dae-8f3e-bb3c8400b262",
         "street": "Street 11",
