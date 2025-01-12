@@ -9,7 +9,7 @@ export const meta: MetaFunction = () => {
 export default function Index() {
   const parcels = parcelsData as Parcel[];
   return (
-    <div className="flex min-h-screen items-center justify-center bg-[#071333]">
+    <div className="flex h-screen items-center justify-center bg-[#071333]">
       {<Table parcels={parcels} />}
     </div>
   );
@@ -17,8 +17,8 @@ export default function Index() {
 
 export function Table({ parcels }: { parcels: Parcel[] }) {
   return (
-    <div className="w-[90%]   overflow-x-auto scrollbar py-3 ">
-      <div className="min-w-[1450px] flex w-[1450px] h-10 px-4  mb-4 text-white text-lg">
+    <div className="max-w-[90%]   overflow-x-auto flex flex-col  scrollbar py-3 h-[50%]">
+      <div className="min-w-[1450px] flex w-[1450px] min-h-14 h-14 px-4  mb-4 rounded-lg text-white text-lg bg-black">
         {" "}
         <div className="flex items-center min-w-[214px] ">
           <div className="w-[100%]">Resident</div>
@@ -26,23 +26,23 @@ export function Table({ parcels }: { parcels: Parcel[] }) {
         <div className="flex items-center min-w-[214px] ">
           <div className="w-[100%]">Property/Unit</div>
         </div>
-        <div className="flex ml-9 items-center min-w-[214px] ">
+        <div className="flex ml-6 items-center min-w-[214px] ">
           <div className="w-[100%] ">ID</div>
         </div>
-        <div className="flex items-center min-w-[214px] ">
+        <div className="flex ml-8 items-center min-w-[150px] ">
           <div className="w-[100%]">Courier</div>
         </div>
         <div className="flex items-center min-w-[214px] ">
           <div className="w-[100%]">Arrived on</div>
         </div>
-        <div className="flex items-center min-w-[214px] ">
+        <div className="flex ml-9 items-center min-w-[214px] ">
           <div className="w-[100%]">Status</div>
         </div>
         <div className="flex items-center  ">
           <div className="w-[100%]">Pick</div>
         </div>
       </div>
-      <div className="h-[200px] w-fit overflow-y-auto scrollbar">
+      <div className=" w-fit overflow-y-auto scrollbar flex-grow">
         {parcels.map((parcel) => {
           return <TableRow key={parcel.id} parcel={parcel} />;
         })}
@@ -68,14 +68,16 @@ export function TableRow({ parcel }: { parcel: Parcel }) {
           <div>{parcel.resident.unit.street} </div>
         </div>
       </div>
-      <div className="flex items-center  min-w-[214px] ml-9">{parcel.id} </div>
-      <div className="flex items-center  min-w-[214px]">{parcel.courier}</div>
+      <div className="flex items-center  min-w-[214px] ml-6">{parcel.id} </div>
+      <div className="flex items-center  min-w-[150px] ml-8">
+        {parcel.courier}
+      </div>
       <div className="flex items-center  min-w-[214px]">{parcel.arrivedIn}</div>
-      <div className="flex items-center  min-w-[214px]">
+      <div className="flex items-center ml-9  min-w-[214px]">
         <div
-          className={`rounded-xl ${
-            parcel.status === "pending" ? "bg-red-400" : "bg-green-400"
-          } px-4 py-0.5`}
+          className={`rounded-xl w-20 flex justify-center  ${
+            parcel.status === "pending" ? "bg-red-200" : "bg-green-200"
+          }  py-0.5`}
         >
           {parcel.status}
         </div>
