@@ -6,7 +6,10 @@ export const meta: MetaFunction = () => {
   return [{ title: "Parcels Managment" }, { name: "description", content: "" }];
 };
 
+
+
 export default function Index() {
+   
   const parcels = parcelsData as Parcel[];
   return (
     <div className="flex h-screen items-center justify-center bg-[#071333]">
@@ -72,7 +75,7 @@ export function TableRow({ parcel }: { parcel: Parcel }) {
       <div className="flex items-center  min-w-[150px] ml-8">
         {parcel.courier}
       </div>
-      <div className="flex items-center  min-w-[214px]">{parcel.arrivedIn}</div>
+      <div className="flex items-center  min-w-[214px]">{parcel.arrivedIn.split('T')[0]}</div>
       <div className="flex items-center ml-9  min-w-[214px]">
         <div
           className={`rounded-xl w-20 flex justify-center  ${
