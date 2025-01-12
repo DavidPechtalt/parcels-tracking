@@ -1,16 +1,26 @@
-import type { MetaFunction } from "@remix-run/node";
+import type { ActionFunctionArgs, MetaFunction } from "@remix-run/node";
 import type { Parcel } from "~/types/parcel";
 import parcelsData from "../data/parcels.json";
+import { Form, useFetcher, useLoaderData } from "@remix-run/react";
 
 export const meta: MetaFunction = () => {
   return [{ title: "Parcels Managment" }, { name: "description", content: "" }];
 };
 
+export function action({ request }: ActionFunctionArgs) {
+  console.log(request);
 
+  return "/fd";
+}
+
+export function loader() {
+  const parcels = parcelsData as Parcel[];
+  return parcels;
+}
 
 export default function Index() {
-   
-  const parcels = parcelsData as Parcel[];
+  const parcels: Parcel[] = useLoaderData<typeof loader>();
+
   return (
     <div className="flex h-screen items-center justify-center bg-[#071333]">
       {<Table parcels={parcels} />}
@@ -55,8 +65,9 @@ export function Table({ parcels }: { parcels: Parcel[] }) {
 }
 
 export function TableRow({ parcel }: { parcel: Parcel }) {
+  const fetcher = useFetcher();
   return (
-    <div className="  min-w-[1450px] w-[1450px] max-w-[1450px] h-20 rounded-lg bg-white flex items-center px-4 text-gray-500 mb-1.5 overflow-x-hidden">
+    <div className="  min-w-[1450px] w-[1450px] max-w-[1450px] h-20 rounded-lg bg-white flex items-center mr-2 px-4 text-gray-500 mb-1.5 overflow-x-hidden">
       <div className="flex items-center min-w-[214px]">
         <img
           className="rounded-full h-10 "
@@ -75,7 +86,9 @@ export function TableRow({ parcel }: { parcel: Parcel }) {
       <div className="flex items-center  min-w-[150px] ml-8">
         {parcel.courier}
       </div>
-      <div className="flex items-center  min-w-[214px]">{parcel.arrivedIn.split('T')[0]}</div>
+      <div className="flex items-center  min-w-[214px]">
+        {parcel.arrivedIn.split("T")[0]}
+      </div>
       <div className="flex items-center ml-9  min-w-[214px]">
         <div
           className={`rounded-xl w-20 flex justify-center  ${
@@ -86,9 +99,17 @@ export function TableRow({ parcel }: { parcel: Parcel }) {
         </div>
       </div>
       <div className="flex items-center min-w-[200px]">
-        <button>
-          <img alt="v" src="/vee.png" className="h-8  rounded-full "></img>
-        </button>
+        <fetcher.Form action="post">
+          {" "}
+          <button
+            name="_action"
+            value={parcel.id}
+            disabled={parcel.status === "taken"}
+            className="disabled:opacity-50"
+          >
+            <img alt="v" src="/vee.png" className="h-8  rounded-full "></img>
+          </button>
+        </fetcher.Form>
       </div>
       <div className="flex items-center ml-8 "></div>
     </div>
