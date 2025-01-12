@@ -6,7 +6,7 @@
       "name": "John Jones",
       "unit": {
         "id": "c607adca-b2f2-4a57-8b40-5b471438f842",
-        "street": "Street 6",
+        "street": "Valley View Road",
         "number": "97"
       },
       "img": {
@@ -27,7 +27,7 @@
       "name": "Harrison Brown",
       "unit": {
         "id": "90ef6513-f4a1-4ca9-b4b3-544c6ecac376",
-        "street": "Street 12",
+        "street": "Ridgewood Circle",
         "number": "254"
       },
       "img": {
@@ -48,7 +48,7 @@
       "name": "Timothy Davis",
       "unit": {
         "id": "2b578b99-349b-4c65-a10f-49401f80880d",
-        "street": "Street 15",
+        "street": "Sunset Drive",
         "number": "45"
       },
       "img": {
@@ -69,7 +69,7 @@
       "name": "Nathan Lopez",
       "unit": {
         "id": "b08ad5bd-960e-4658-bd4b-091d29cf577e",
-        "street": "Street 10",
+        "street": "Sunnybrook Avenue",
         "number": "361"
       },
       "img": {
@@ -90,7 +90,7 @@
       "name": "Christopher Clark",
       "unit": {
         "id": "a25c8bbd-4ecc-47b5-9e3c-ebc33ad2aa9f",
-        "street": "Street 6",
+        "street": "Hillside Court",
         "number": "336"
       },
       "img": {
@@ -108,15 +108,15 @@
     "id": "c732daf4-1018-44ff-8a2c-cda5b6bfd132",
     "resident": {
       "id": "59e6afd9-f7e1-42b3-93ed-1ffe8d9d87d8",
-      "name": "Jacob Smith", 
+      "name": "Jacob Smith",
       "unit": {
         "id": "06e7b940-ad06-4dae-8f3e-bb3c8400b262",
-        "street": "Street 11",
+        "street": "Lakeview Road",
         "number": "437"
       },
       "img": {
         "src": "/6.jpg",
-        "alt": "Profile picture of Resident 6", 
+        "alt": "Profile picture of Resident 6",
         "id": "06932d70-a792-4373-9222-2b097086a7d1"
       }
     },
@@ -132,7 +132,7 @@
       "name": "Oliver Sanchez",
       "unit": {
         "id": "7e0efe97-88ec-4c16-9136-e99ff2499fee",
-        "street": "Street 18",
+        "street": "Meadowbrook Lane",
         "number": "423"
       },
       "img": {
@@ -153,7 +153,7 @@
       "name": "Sean Martinez",
       "unit": {
         "id": "401b2637-4343-41b3-a222-8464ffad3a6d",
-        "street": "Street 8",
+        "street": "Crystal Lake Path",
         "number": "12"
       },
       "img": {
@@ -174,7 +174,7 @@
       "name": "Vincent Anderson",
       "unit": {
         "id": "01d2b549-d3a3-4c14-9f5a-685a70a5da09",
-        "street": "Street 8",
+        "street": "Chestnut Street",
         "number": "388"
       },
       "img": {
@@ -195,7 +195,7 @@
       "name": "Patrick Ramirez",
       "unit": {
         "id": "07749eaf-0e17-45f8-8d60-d588b330db33",
-        "street": "Street 16",
+        "street": "Aspen Circle",
         "number": "487"
       },
       "img": {
@@ -216,7 +216,7 @@
       "name": "Nicholas Rodriguez",
       "unit": {
         "id": "9266b82d-1f2a-4d5b-b085-e23ea11ee3a8",
-        "street": "Street 6",
+        "street": "Spruce Terrace",
         "number": "31"
       },
       "img": {
@@ -237,7 +237,7 @@
       "name": "Michael Wilson",
       "unit": {
         "id": "f1ff391f-cc78-488f-8b53-3822d2dcc43d",
-        "street": "Street 1",
+        "street": "Birch Road",
         "number": "413"
       },
       "img": {
@@ -258,7 +258,7 @@
       "name": "Luke Taylor",
       "unit": {
         "id": "fed6d2a5-b3b6-4760-9b7c-54bc24ff65cd",
-        "street": "Street 7",
+        "street": "Cedar Lane",
         "number": "354"
       },
       "img": {
@@ -279,7 +279,7 @@
       "name": "Kyle Moore",
       "unit": {
         "id": "5576b873-0b83-4499-8fbf-be1178e69e84",
-        "street": "Street 15",
+        "street": "Parkside Boulevard",
         "number": "167"
       },
       "img": {
@@ -300,7 +300,7 @@
       "name": "Alexander Thomas",
       "unit": {
         "id": "db3e39c1-7012-4aac-831b-02d18b60cac4",
-        "street": "Street 9",
+        "street": "Riverbank Way",
         "number": "8"
       },
       "img": {
@@ -321,7 +321,7 @@
       "name": "Benjamin Perez",
       "unit": {
         "id": "4a6044a4-4622-47d5-82fd-f66d147b7f36",
-        "street": "Street 4",
+        "street": "Pine Drive",
         "number": "421"
       },
       "img": {
@@ -342,7 +342,7 @@
       "name": "Mark Robinson",
       "unit": {
         "id": "7e501cf7-48fa-49c8-bb96-29815504e6b1",
-        "street": "Street 12",
+        "street": "Elm Boulevard",
         "number": "425"
       },
       "img": {
@@ -363,7 +363,7 @@
       "name": "Paul Williams",
       "unit": {
         "id": "15973876-ade2-4433-b633-586e0228d335",
-        "street": "Street 10",
+        "street": "Forest Hill Drive",
         "number": "217"
       },
       "img": {
@@ -384,7 +384,7 @@
       "name": "Tyler Miller",
       "unit": {
         "id": "d32b088d-1a23-430e-95e6-f205b2b8e914",
-        "street": "Street 7",
+        "street": "Willow Court",
         "number": "339"
       },
       "img": {
@@ -405,7 +405,7 @@
       "name": "Stephen Harris",
       "unit": {
         "id": "033abbaf-585a-41be-a993-c823112c0c41",
-        "street": "Street 6",
+        "street": "Silver Birch Lane",
         "number": "25"
       },
       "img": {
@@ -426,7 +426,7 @@
       "name": "Quentin Thompson",
       "unit": {
         "id": "58af608c-48ef-44bd-8df5-aa43fae8c313",
-        "street": "Street 18",
+        "street": "Golden Meadow Road",
         "number": "289"
       },
       "img": {
@@ -447,7 +447,7 @@
       "name": "James Martin",
       "unit": {
         "id": "a03c7bd4-cac9-48b1-9290-1ce98c2b9656",
-        "street": "Street 6",
+        "street": "Brookhaven Drive",
         "number": "33"
       },
       "img": {
@@ -468,7 +468,7 @@
       "name": "Charles White",
       "unit": {
         "id": "35fb1129-362a-4ee7-9991-85704939ba92",
-        "street": "Street 9",
+        "street": "Oak Street",
         "number": "21"
       },
       "img": {
@@ -489,7 +489,7 @@
       "name": "Edward Jackson",
       "unit": {
         "id": "81dfc082-e02e-4866-b189-18cf46bd0827",
-        "street": "Street 15",
+        "street": "Maple Avenue",
         "number": "132"
       },
       "img": {
@@ -510,7 +510,7 @@
       "name": "Brian Lewis",
       "unit": {
         "id": "1b549fe1-31f7-459c-a6e3-2ae84d80907c",
-        "street": "Street 10",
+        "street": "Highland Drive",
         "number": "435"
       },
       "img": {
