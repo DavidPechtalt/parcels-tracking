@@ -1,5 +1,6 @@
 import type { MetaFunction } from "@remix-run/node";
-import parcels from "../data/residents.json";
+import type { Parcel } from "~/types/parcel";
+import parcels from "../data/parcels.json";
 
 export const meta: MetaFunction = () => {
   return [
@@ -9,9 +10,10 @@ export const meta: MetaFunction = () => {
 };
 
 export default function Index() {
+ const rparcels = parcels as Parcel[]
   return (
     <div className="flex min-h-screen items-center justify-center bg-[#071333]">
-      {isParcelArr(parcels) && <Table parcels={parcels} />}
+      { <Table parcels={rparcels} />}
     </div>
   );
 }
@@ -56,23 +58,23 @@ export function TableRow({parcel}: {parcel:Parcel}) {
     <div className="  min-w-[1450px] w-[1450px] max-w-[1450px] h-20 rounded-lg bg-white flex items-center px-4 text-gray-500 mb-1.5 overflow-x-hidden">
       <div className="flex items-center min-w-[214px]">
         <img
-          className="rounded-full h-7 w-7 "
-          src={parcel.img.url}
-          alt="avatar"
+          className="rounded-full h-9 "
+          src={parcel.resident.img.src}
+          alt={parcel.resident.img.alt}
         ></img>
-        <div className="ml-3">{parcel.name}</div>
+        <div className="ml-3">{parcel.resident.name}</div>
       </div>
       <div className="flex items-center min-w-[214px] ">
         <div className="w-[100%]">
-          <div>101</div>
-          <div>{parcel.property} </div>
+          <div>{parcel.resident.unit.number}</div>
+          <div>{parcel.resident.unit.street} </div>
         </div>
       </div>
       <div className="flex items-center  min-w-[214px] ml-9">{parcel.id} </div>
       <div className="flex items-center  min-w-[214px]">{parcel.courier}</div>
-      <div className="flex items-center  min-w-[214px]">{parcel.arrivingDate.toString()}</div>
+      <div className="flex items-center  min-w-[214px]">{parcel.arrivedIn}</div>
       <div className="flex items-center  min-w-[214px]">
-        <div className="rounded-xl bg-[#fae4e1] px-4 py-0.5">{parcel.status}</div>
+        <div className={`rounded-xl ${parcel.status === "pending"?"bg-red-400":"bg-green-400"} px-4 py-0.5`}>{parcel.status}</div>
       </div>
       <div className="flex items-center min-w-[200px]">
         <button>
@@ -84,63 +86,8 @@ export function TableRow({parcel}: {parcel:Parcel}) {
   );
 }
 
-export interface Parcel {
-  name: string;
-  img: ProfileImg;
-  property: string;
-  id: string;
-  courier: Courier;
-  arrivingDate: Date;
-  status: "pending" | "taken";
-}
 
-export function isParcel(data: Parcel | unknown): data is Parcel {
-  if (
-    data &&
-    typeof data === "object" &&
-    "name" in data &&
-    typeof data.name === "string" &&
-    "courier" in data &&
-    isCourier(data.courier) &&
-    "img" in data &&
-    isProfileImage(data.img)
-  ) {
-    return true;
-  }
-  return false;
-}
-export function isParcelArr(arr: unknown[]): arr is Parcel[] {
-  for (const parcel of parcels) {
-    if (!isParcel(parcel)) {
-      return false;
-    }
-  }
-  return true;
-}
 
-export function isCourier(name: Courier | unknown): name is Courier {
-  for (const courier of CourierArr) {
-    if (courier === name) return true;
-  }
-  return false;
-}
-export function isProfileImage(data: ProfileImg | unknown): data is ProfileImg {
-  if (
-    data &&
-    typeof data === "object" &&
-    "url" in data &&
-    typeof data.url === "string" &&
-    "alt" in data &&
-    typeof data.alt === "string"
-  ) {
-    return true;
-  }
-  return false;
-}
-export type ProfileImg = {
-  url: string;
-  alt: string;
-};
 
-const CourierArr = ["Amazon", "Ebay", "Pedax", "AliExpress"] as const;
-type Courier = (typeof CourierArr)[number];
+
+

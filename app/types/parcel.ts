@@ -1,10 +1,13 @@
 import { ParcelCourier } from "./parcelCourier";
+import { ParcelLocation } from "./parcelLocation";
+import { ParcelStatus } from "./parcelStatus";
 import { Resident } from "./resident";
 
 export interface Parcel {
     id:string;
-    residnent:Resident;
+    resident:Resident;
     courier:ParcelCourier; 
-    arrivedIn:Date;
-    location:Location;
+    arrivedIn:string;
+    location:ParcelLocation;
+    status:ParcelStatus
 }

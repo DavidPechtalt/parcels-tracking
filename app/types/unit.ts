@@ -1,5 +1,5 @@
 export interface Unit{
     id:string;
-    dtreet:string;
+    street:string;
     number:string;
 }
