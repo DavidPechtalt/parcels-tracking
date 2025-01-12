@@ -17,7 +17,7 @@ export default function Index() {
 
 export function Table({ parcels }: { parcels: Parcel[] }) {
   return (
-    <div className="w-[90%]   overflow-x-auto scrollbar py-3">
+    <div className="w-[90%]   overflow-x-auto scrollbar py-3 ">
       <div className="min-w-[1450px] flex w-[1450px] h-10 px-4  mb-4 text-white text-lg">
         {" "}
         <div className="flex items-center min-w-[214px] ">
@@ -42,9 +42,11 @@ export function Table({ parcels }: { parcels: Parcel[] }) {
           <div className="w-[100%]">Pick</div>
         </div>
       </div>
-      {parcels.map((parcel) => {
-        return <TableRow key={parcel.id} parcel={parcel} />;
-      })}
+      <div className="h-[200px] w-fit overflow-y-auto scrollbar">
+        {parcels.map((parcel) => {
+          return <TableRow key={parcel.id} parcel={parcel} />;
+        })}
+      </div>
     </div>
   );
 }
