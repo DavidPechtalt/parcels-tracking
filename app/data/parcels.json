@@ -18,7 +18,7 @@
     "courier": "DHL",
     "arrivedIn": "2024-12-10T11:39:51.029095",
     "location": "Behind the reception counter",
-    "status": "taken"
+    "status": "picked up"
   },
   {
     "id": "89e71268-b7d0-4ef1-89c8-d86afde57781",
@@ -60,7 +60,7 @@
     "courier": "Japan Post",
     "arrivedIn": "2025-01-02T11:39:51.029128",
     "location": "Parcel locker #2",
-    "status": "taken"
+    "status": "picked up"
   },
   {
     "id": "85d20fae-0cef-44ae-963c-0a084f2b4de8",
@@ -81,7 +81,7 @@
     "courier": "AliExpress",
     "arrivedIn": "2024-12-28T11:39:51.029137",
     "location": "Reception desk",
-    "status": "taken"
+    "status": "picked up"
   },
   {
     "id": "fb7cd93c-1c68-47a6-9c6c-96cd63f77f5e",
@@ -270,7 +270,7 @@
     "courier": "GLS",
     "arrivedIn": "2024-12-18T11:39:51.029221",
     "location": "Parcel locker #2",
-    "status": "taken"
+    "status": "picked up"
   },
   {
     "id": "9c756c92-5eea-40a3-91f4-023613a7b568",
@@ -354,7 +354,7 @@
     "courier": "Australia Post",
     "arrivedIn": "2025-01-01T11:39:51.029258",
     "location": "Reception desk",
-    "status": "taken"
+    "status": "picked up"
   },
   {
     "id": "541fcde2-4835-461b-b42e-395d6d73a3e7",
@@ -375,7 +375,7 @@
     "courier": "Aramex",
     "arrivedIn": "2024-12-22T11:39:51.029265",
     "location": "Parcel locker #2",
-    "status": "taken"
+    "status": "picked up"
   },
   {
     "id": "99f842fd-a734-4ba3-bf33-fc9f7ce3629c",
@@ -396,7 +396,7 @@
     "courier": "AliExpress",
     "arrivedIn": "2024-12-13T11:39:51.029273",
     "location": "Security desk",
-    "status": "taken"
+    "status": "picked up"
   },
   {
     "id": "ad253702-b6c3-4f76-ac1c-6829a2d5c9be",
@@ -417,7 +417,7 @@
     "courier": "Aramex",
     "arrivedIn": "2025-01-08T11:39:51.029280",
     "location": "Security desk",
-    "status": "taken"
+    "status": "picked up"
   },
   {
     "id": "0efe4d39-b995-4740-b1ac-b337e6787074",
@@ -459,7 +459,7 @@
     "courier": "GLS",
     "arrivedIn": "2024-12-21T11:39:51.029298",
     "location": "Parcel locker #2",
-    "status": "taken"
+    "status": "picked up"
   },
   {
     "id": "f30817b0-2cf9-4546-ac25-592f4d80e036",
@@ -522,7 +522,7 @@
     "courier": "UPS",
     "arrivedIn": "2024-12-26T11:39:51.029423",
     "location": "Behind the reception counter",
-    "status": "taken"
+    "status": "picked up"
   },
   {
     "id": "62612102-b029-4ac6-b0fe-870e7685aa53",
@@ -627,6 +627,6 @@
     "courier": "FedEx",
     "arrivedIn": "2025-01-05T11:39:51.029455",
     "location": "Shelf C",
-    "status": "taken"
+    "status": "picked up"
   }
 ]

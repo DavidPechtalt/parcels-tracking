@@ -1,7 +1,7 @@
 import type { ActionFunctionArgs, MetaFunction } from "@remix-run/node";
 import type { Parcel } from "~/types/parcel";
 import parcelsData from "../data/parcels.json";
-import { Form, useFetcher, useLoaderData } from "@remix-run/react";
+import {  useFetcher, useLoaderData } from "@remix-run/react";
 
 export const meta: MetaFunction = () => {
   return [{ title: "Parcels Managment" }, { name: "description", content: "" }];
@@ -104,7 +104,7 @@ export function TableRow({ parcel }: { parcel: Parcel }) {
           <button
             name="_action"
             value={parcel.id}
-            disabled={parcel.status === "taken"}
+            disabled={parcel.status === "picked up"}
             className="disabled:opacity-50"
           >
             <img alt="v" src="/vee.png" className="h-8  rounded-full "></img>

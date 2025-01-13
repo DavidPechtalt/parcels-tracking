@@ -1,2 +1,2 @@
-export const parcelStatusArr = ["pending", "taken"] as const;
+export const parcelStatusArr = ["pending", "picked up"] as const;
 export type ParcelStatus = (typeof parcelStatusArr)[number];
