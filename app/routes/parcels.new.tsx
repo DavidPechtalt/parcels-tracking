@@ -1,10 +1,44 @@
 import { ActionFunctionArgs } from "@remix-run/node";
 import { Form, Link, redirect } from "@remix-run/react";
-
+import { isParcelLocation, parcelLocationsArr } from "~/types/parcelLocation";
+import {
+  isParcelCourier,
+  parcelCourierArr,
+} from "~/types/parcelCourier";
+import { addParcel } from "~/parcelsData";
+import { Parcel } from "~/types/parcel";
 export async function action({ request }: ActionFunctionArgs) {
   const formData = await request.formData();
-  console.log(formData.get('courier'));
-  return redirect('../')
+  const id = formData.get("id");
+  const courier = formData.get("courier");
+  const location = formData.get("location");
+  const note = formData.get("note");
+  if (
+    typeof id !== "string" ||
+    typeof courier !== "string" ||
+    !isParcelCourier(courier) ||
+    typeof location !== "string" ||
+    !isParcelLocation(location) ||
+    typeof note !== "string"
+  ) {
+    return Response.json(
+      {
+        error: " id, courier and location are required",
+      },
+      { status: 400 }
+    );
+  }
+
+  const newParcel = {
+    id,
+    courier,
+    location,
+    note,
+    arrivedIn: new Date().toISOString(),
+    status: "pending",
+  };
+  addParcel(newParcel as Omit<Parcel, "resident">);
+  return redirect("..");
 }
 
 export default function NewParcel() {
@@ -39,13 +73,24 @@ export default function NewParcel() {
               <label htmlFor="courier" className="block">
                 <span className="text-xs">*</span>Courier
               </label>
-              <input
+              <select
                 name="courier"
                 id="courier"
-                type="text"
+                defaultValue=""
                 required
-                className="border border-gray-400 rounded-md h-8 w-[100%] "
-              />
+                className="border border-gray-400 rounded-md h-8 w-[100%]"
+              >
+                <option selected value="">
+                  --please select a courier--
+                </option>
+                {parcelCourierArr.map((courier) => {
+                  return (
+                    <option key={courier} value={courier}>
+                      {courier}
+                    </option>
+                  );
+                })}
+              </select>
             </div>
             <div className="mb-8">
               {" "}
@@ -53,10 +98,10 @@ export default function NewParcel() {
                 <span className="text-xs">*</span>Resident / Unit
               </label>
               <input
-                name="resident"
+                // name="resident"
                 id="resident"
                 type="text"
-                required
+                // required
                 className="border border-gray-400 rounded-md h-8 w-[100%] "
               />
             </div>
@@ -65,13 +110,24 @@ export default function NewParcel() {
               <label htmlFor="location" className="block">
                 <span className="text-xs">*</span>location
               </label>
-              <input
+              <select
                 name="location"
                 id="location"
-                type="text"
+                defaultValue=""
                 required
-                className="border border-gray-400 rounded-md h-8 w-[100%] "
-              />
+                className="border border-gray-400 rounded-md h-8 w-[100%]"
+              >
+                <option selected value="">
+                  --please select location--
+                </option>
+                {parcelLocationsArr.map((location) => {
+                  return (
+                    <option key={location} value={location}>
+                      {location}
+                    </option>
+                  );
+                })}
+              </select>
             </div>
             <div className="mb-8">
               {" "}

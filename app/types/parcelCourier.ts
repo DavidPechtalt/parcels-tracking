@@ -1,4 +1,4 @@
-export const CourierArr = [
+export const parcelCourierArr = [
   "Amazon",
   "Ebay",
   "FedEx",
@@ -20,4 +20,12 @@ export const CourierArr = [
   "India Post",
   "La Poste",
 ] as const;
-export type ParcelCourier = (typeof CourierArr)[number];
+export type ParcelCourier = (typeof parcelCourierArr)[number];
+
+export function isParcelCourier(
+  stringToCheck: string
+): stringToCheck is ParcelCourier {
+  return (
+    parcelCourierArr.find((courier) => courier === stringToCheck) !== undefined
+  );
+}

@@ -15,3 +15,12 @@ export const parcelLocationsArr = [
 ] as const;
 
 export type ParcelLocation = (typeof parcelLocationsArr)[number];
+
+export function isParcelLocation(
+  stringToCheck: string
+): stringToCheck is ParcelLocation {
+  return (
+    parcelLocationsArr.find((location) => location === stringToCheck) !==
+    undefined
+  );
+}
