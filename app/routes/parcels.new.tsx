@@ -1,30 +1,39 @@
 import { ActionFunctionArgs } from "@remix-run/node";
 import { Form, Link, redirect } from "@remix-run/react";
 import { isParcelLocation, parcelLocationsArr } from "~/types/parcelLocation";
-import {
-  isParcelCourier,
-  parcelCourierArr,
-} from "~/types/parcelCourier";
-import { addParcel } from "~/parcelsData";
+import { isParcelCourier, parcelCourierArr } from "~/types/parcelCourier";
+import { addParcel } from "~/data/parcelsData";
 import { Parcel } from "~/types/parcel";
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
+import residentsData, { getResidentByName } from "~/data/residentsData";
 export async function action({ request }: ActionFunctionArgs) {
   const formData = await request.formData();
   const id = formData.get("id");
   const courier = formData.get("courier");
   const location = formData.get("location");
   const note = formData.get("note");
+  const residentName = formData.get("resident");
   if (
     typeof id !== "string" ||
     typeof courier !== "string" ||
     !isParcelCourier(courier) ||
     typeof location !== "string" ||
     !isParcelLocation(location) ||
-    typeof note !== "string"
+    typeof note !== "string" ||
+    typeof residentName !== "string"
   ) {
     return Response.json(
       {
         error: " id, courier and location are required",
+      },
+      { status: 400 }
+    );
+  }
+  const resident = getResidentByName(residentName);
+  if (!resident) {
+    return Response.json(
+      {
+        error: "resident does not exist",
       },
       { status: 400 }
     );
@@ -37,8 +46,9 @@ export async function action({ request }: ActionFunctionArgs) {
     note,
     arrivedIn: new Date().toISOString(),
     status: "pending",
+    resident,
   };
-  addParcel(newParcel as Omit<Parcel, "resident">);
+  addParcel(newParcel as Parcel);
   return redirect("..");
 }
 
@@ -75,16 +85,17 @@ export default function NewParcel() {
               <label htmlFor="courier" className="block">
                 <span className="text-xs">*</span>Courier
               </label>
-              <select
+              <input
+                className="border border-gray-400 rounded-md h-8 w-[100%] px-1"
+                type="text"
+                required
                 name="courier"
                 id="courier"
+                list="courier-list"
                 defaultValue=""
-                required
-                className="border border-gray-400 rounded-md h-8 w-[100%]"
-              >
-                <option selected value="">
-                  --please select a courier--
-                </option>
+              />
+              <datalist id="courier-list">
+                {" "}
                 {parcelCourierArr.map((courier) => {
                   return (
                     <option key={courier} value={courier}>
@@ -92,20 +103,29 @@ export default function NewParcel() {
                     </option>
                   );
                 })}
-              </select>
+              </datalist>
             </div>
             <div className="mb-8">
-              {" "}
               <label htmlFor="resident" className="block">
-                <span className="text-xs">*</span>Resident / Unit
+                <span className="text-xs">*</span>Resident
               </label>
               <input
-                // name="resident"
+                name="resident"
                 id="resident"
+                required
+                className="border border-gray-400 rounded-md h-8 px-1 w-[100%] flex items-center"
+                list="resident-list"
                 type="text"
-                // required
-                className="border border-gray-400 rounded-md h-8 w-[100%] "
               />
+              <datalist id="resident-list">
+                {residentsData.map((resident) => {
+                  return (
+                    <option key={resident.id} value={resident.name}>
+                      {resident.name}
+                    </option>
+                  );
+                })}
+              </datalist>
             </div>
             <div className="mb-8">
               {" "}
@@ -143,7 +163,10 @@ export default function NewParcel() {
               />
             </div>
             <div className="w-[100%] flex justify-center">
-              <button className="bg-orange-500 px-4 rounded-lg py-2 text-gray-700">
+              <button
+                className="bg-orange-500 px-4 rounded-lg py-2 text-gray-700"
+                type="submit"
+              >
                 submit
               </button>
             </div>
