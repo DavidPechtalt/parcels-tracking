@@ -7,6 +7,7 @@ import {
 } from "~/types/parcelCourier";
 import { addParcel } from "~/parcelsData";
 import { Parcel } from "~/types/parcel";
+import { v4 as uuidv4 } from 'uuid';
 export async function action({ request }: ActionFunctionArgs) {
   const formData = await request.formData();
   const id = formData.get("id");
@@ -65,7 +66,8 @@ export default function NewParcel() {
                 id="id"
                 type="text"
                 required
-                className="border border-gray-400 rounded-md h-8 w-[100%] "
+                className="border border-gray-400 rounded-md h-8 w-[100%] px-2"
+                value={uuidv4()}
               />
             </div>
             <div className="mb-8">
