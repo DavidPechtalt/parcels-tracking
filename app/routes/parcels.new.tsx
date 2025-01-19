@@ -58,7 +58,7 @@ export default function NewParcel() {
       <div className="flex flex-col">
         <div className="h-14 border-b-2 flex items-center">
           <div className="ml-5  mb-2">
-            <Link className="text-gray-500 text-2xl" to={"../"}>
+            <Link className="text-gray-500 text-2xl" to={".."}>
               x
             </Link>
             <span className="ml-4 font-bold">Create New Package</span>
