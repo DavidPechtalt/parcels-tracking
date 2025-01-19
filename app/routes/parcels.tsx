@@ -1,9 +1,29 @@
 import type { Parcel } from "~/types/parcel";
 import parcelsData from "../data/parcels.json";
-import { Link, Outlet, redirect, useLoaderData } from "@remix-run/react";
+import {
+  Link,
+  Outlet,
+  redirect,
+  useFetcher,
+  useLoaderData,
+} from "@remix-run/react";
+import { FormEvent } from "react";
+import { ActionFunctionArgs } from "@remix-run/node";
+import { pickParcel } from "~/data/parcelsData";
 
-export function action() {
-  return redirect("/");
+export async function action({ request }: ActionFunctionArgs) {
+  const data = await request.formData();
+  const id = data.get("status");
+  console.log("action")
+  console.log(id)
+  if (!id || typeof id !== "string") {
+    return Response.json({ error: "id issue" }, { status: 400 });
+  }
+  if(!pickParcel(id)) {
+    return Response.json({ error: "wrong parcel id" }, { status: 400 });
+  }
+
+  return redirect('.');
 }
 export function loader() {
   const parcels = parcelsData as Parcel[];
@@ -14,7 +34,6 @@ export default function Parcels() {
   const parcels: Parcel[] = useLoaderData<typeof loader>();
 
   return (
-    
     <div className="flex flex-col items-center justify-center h-screen bg-[#071333]">
       <div className="flex-grow"></div>
       <div className="w-[100%] flex justify-end mb-7">
@@ -67,6 +86,12 @@ export function Table({ parcels }: { parcels: Parcel[] }) {
 }
 
 export function TableRow({ parcel }: { parcel: Parcel }) {
+  const fetcher = useFetcher();
+  function handleSubmit(e: FormEvent<HTMLFormElement>) {
+    if (!confirm("Are you picking the package?")) {
+      e.preventDefault();
+    }
+  }
   return (
     <div className="  min-w-[1450px] w-[1450px] max-w-[1450px] h-20 rounded-lg bg-white flex items-center mr-2 px-4 text-gray-500 mb-1.5 overflow-x-hidden">
       <div className="flex items-center min-w-[214px]">
@@ -100,13 +125,17 @@ export function TableRow({ parcel }: { parcel: Parcel }) {
         </div>
       </div>
       <div className="flex items-center min-w-[200px]">
-        {" "}
-        <button
-          disabled={parcel.status === "picked up"}
-          className="disabled:opacity-50"
-        >
-          <img alt="v" src="/vee.png" className="h-8  rounded-full "></img>
-        </button>
+        <fetcher.Form onSubmit={(e) => handleSubmit(e)} method="post">
+          {" "}
+          <button
+            name="status"
+            value={parcel.id}
+            disabled={parcel.status === "picked up"}
+            className="disabled:opacity-50"
+          >
+            <img alt="v" src="/vee.png" className="h-8  rounded-full "></img>
+          </button>
+        </fetcher.Form>{" "}
       </div>
       <div className="flex items-center ml-8 "></div>
     </div>
