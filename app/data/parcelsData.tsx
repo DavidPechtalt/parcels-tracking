@@ -17,3 +17,7 @@ export function pickParcel(parcelId:string){
   return true;
 
 }
+
+export function findParcel(parcelId:string){
+  return parcels.find(parcel => parcel.id === parcelId)
+}

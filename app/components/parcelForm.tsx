@@ -4,26 +4,19 @@ import { residentsNames } from "~/data/residentsData";
 import { action } from "~/routes/parcels.new";
 import {
   isParcelCourier,
-  ParcelCourier,
   parcelCourierArr,
 } from "~/types/parcelCourier";
 import {
   isParcelLocation,
-  ParcelLocation,
   parcelLocationsArr,
 } from "~/types/parcelLocation";
 import { v4 as uuidv4 } from "uuid";
+import { Parcel } from "~/types/parcel";
 
 export default function ParcelForm({
   parcelData,
 }: {
-  parcelData?: {
-    id: string;
-    courier: ParcelCourier;
-    resident: string;
-    location: ParcelLocation;
-    note?: string;
-  };
+  parcelData?: Parcel
 }) {
   const actionData = useActionData<typeof action>();
 
@@ -140,7 +133,7 @@ export default function ParcelForm({
                 className="border border-gray-400 rounded-md h-8 px-1 w-[100%] flex items-center"
                 list="resident-list"
                 type="text"
-                defaultValue={parcelData?.resident || ""}
+                defaultValue={parcelData?.resident.name || ""}
                 onFocus={() => {
                     residentError && setResidentError(false);
                   }}
@@ -205,7 +198,7 @@ export default function ParcelForm({
                 name="note"
                 id="note"
                 className="border-gray-400  w-[100%] rounded-md h-16 outline-gray-700 ring-1 ring-gray-400"
-                defaultValue={parcelData?.note || ""}
+                defaultValue={parcelData?.notes|| ""}
               />
             </div>
             <div className="w-[100%] flex justify-center">

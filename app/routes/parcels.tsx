@@ -14,16 +14,16 @@ import { pickParcel } from "~/data/parcelsData";
 export async function action({ request }: ActionFunctionArgs) {
   const data = await request.formData();
   const id = data.get("status");
-  console.log("action")
-  console.log(id)
+  console.log("action");
+  console.log(id);
   if (!id || typeof id !== "string") {
     return Response.json({ error: "id issue" }, { status: 400 });
   }
-  if(!pickParcel(id)) {
+  if (!pickParcel(id)) {
     return Response.json({ error: "wrong parcel id" }, { status: 400 });
   }
 
-  return redirect('.');
+  return redirect(".");
 }
 export function loader() {
   const parcels = parcelsData as Parcel[];
@@ -52,7 +52,7 @@ export default function Parcels() {
 export function Table({ parcels }: { parcels: Parcel[] }) {
   return (
     <div className="max-w-[90%]   overflow-x-auto flex flex-col  scrollbar py-2 h-[65%]">
-      <div className="min-w-[1450px] flex w-[1450px] min-h-14 h-14 px-4  mb-4 rounded-lg text-white text-lg bg-black">
+      <div className="min-w-[1650px] flex w-[1450px] min-h-14 h-14 px-4  mb-4 rounded-lg text-white text-lg bg-black">
         {" "}
         <div className="flex items-center min-w-[214px] ">
           <div className="w-[100%]">Resident</div>
@@ -72,8 +72,11 @@ export function Table({ parcels }: { parcels: Parcel[] }) {
         <div className="flex ml-9 items-center min-w-[214px] ">
           <div className="w-[100%]">Status</div>
         </div>
-        <div className="flex items-center  ">
+        <div className="flex items-center min-w-[214px] ">
           <div className="w-[100%]">Pick</div>
+        </div>
+        <div className="flex items-center  min-w-[214px]">
+          <div className="w-[100%]">Edit</div>
         </div>
       </div>
       <div className=" w-fit overflow-y-auto scrollbar flex-grow">
@@ -93,7 +96,7 @@ export function TableRow({ parcel }: { parcel: Parcel }) {
     }
   }
   return (
-    <div className="  min-w-[1450px] w-[1450px] max-w-[1450px] h-20 rounded-lg bg-white flex items-center mr-2 px-4 text-gray-500 mb-1.5 overflow-x-hidden">
+    <div className="  min-w-[1650px] w-[1650px] max-w-[1650px] h-20 rounded-lg bg-white flex items-center mr-2 px-4 text-gray-500 mb-1.5 overflow-x-hidden">
       <div className="flex items-center min-w-[214px]">
         <img
           className="rounded-full h-10 "
@@ -137,7 +140,10 @@ export function TableRow({ parcel }: { parcel: Parcel }) {
           </button>
         </fetcher.Form>{" "}
       </div>
-      <div className="flex items-center ml-8 "></div>
+      <div className="flex items-center min-w-[200px]">
+        <Link to={`./${parcel.id}/edit`}>Edit</Link>
+      </div>
+      {/* <div className="flex items-center ml-8 text-white ">d</div> */}
     </div>
   );
 }

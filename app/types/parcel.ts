@@ -10,4 +10,5 @@ export interface Parcel {
   arrivedIn: string;
   location: ParcelLocation;
   status: ParcelStatus;
+  notes?:string
 }
