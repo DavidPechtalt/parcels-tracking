@@ -90,6 +90,7 @@ export default function ParcelForm({
                 type="text"
                 required
                 className="border border-gray-400 rounded-md h-8 w-[100%] px-2"
+                readOnly
                 value={parcelData ? parcelData.id : uuidv4()}
               />
             </div>
