@@ -6,6 +6,7 @@ import { addParcel } from "~/data/parcelsData";
 import { Parcel } from "~/types/parcel";
 import { v4 as uuidv4 } from "uuid";
 import residentsData, { getResidentByName } from "~/data/residentsData";
+
 export async function action({ request }: ActionFunctionArgs) {
   const formData = await request.formData();
   const id = formData.get("id");
