@@ -2,9 +2,8 @@ import type { Parcel } from "~/types/parcel";
 import parcelsData from "../data/parcels.json";
 import { Link, Outlet, redirect, useLoaderData } from "@remix-run/react";
 
-
-export function action(){
-    return redirect('/')
+export function action() {
+  return redirect("/");
 }
 export function loader() {
   const parcels = parcelsData as Parcel[];
@@ -15,20 +14,25 @@ export default function Parcels() {
   const parcels: Parcel[] = useLoaderData<typeof loader>();
 
   return (
-    <div className="flex flex-col h-screen items-center justify-center bg-[#071333]">
-      <div className="w-[100%] flex justify-end mb-16">
-        <div className="h-8 bg-orange-500 px-2 mr-20 flex justify-center items-center text-white rounded-lg"> <Link to={`./new`}> New Package</Link></div>
-       
+    
+    <div className="flex flex-col items-center justify-center h-screen bg-[#071333]">
+      <div className="flex-grow"></div>
+      <div className="w-[100%] flex justify-end mb-7">
+        <div className="h-8 bg-orange-500 px-2 mr-24 flex justify-center items-center text-white rounded-lg">
+          {" "}
+          <Link to={`./new`}> New Package</Link>
+        </div>
       </div>
       {<Table parcels={parcels} />}
-      <Outlet context={parcels}/>
+      <Outlet context={parcels} />
+      <div className="h-1"></div>
     </div>
   );
 }
 
 export function Table({ parcels }: { parcels: Parcel[] }) {
   return (
-    <div className="max-w-[90%]   overflow-x-auto flex flex-col  scrollbar py-3 h-[50%]">
+    <div className="max-w-[90%]   overflow-x-auto flex flex-col  scrollbar py-2 h-[65%]">
       <div className="min-w-[1450px] flex w-[1450px] min-h-14 h-14 px-4  mb-4 rounded-lg text-white text-lg bg-black">
         {" "}
         <div className="flex items-center min-w-[214px] ">
