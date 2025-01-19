@@ -1,11 +1,13 @@
 import { ActionFunctionArgs } from "@remix-run/node";
-import { Form, Link, redirect } from "@remix-run/react";
+import { Form, Link, redirect, useActionData } from "@remix-run/react";
 import { isParcelLocation, parcelLocationsArr } from "~/types/parcelLocation";
 import { isParcelCourier, parcelCourierArr } from "~/types/parcelCourier";
 import { addParcel } from "~/data/parcelsData";
 import { Parcel } from "~/types/parcel";
 import { v4 as uuidv4 } from "uuid";
-import residentsData, { getResidentByName } from "~/data/residentsData";
+import { getResidentByName, residentsNames } from "~/data/residentsData";
+import { FormEvent, useState } from "react";
+import { ParcelFormError } from "~/types/parcelFormError";
 
 export async function action({ request }: ActionFunctionArgs) {
   const formData = await request.formData();
@@ -14,32 +16,32 @@ export async function action({ request }: ActionFunctionArgs) {
   const location = formData.get("location");
   const note = formData.get("note");
   const residentName = formData.get("resident");
+  let error: ParcelFormError | undefined
   if (
     typeof id !== "string" ||
     typeof courier !== "string" ||
-    !isParcelCourier(courier) ||
     typeof location !== "string" ||
-    !isParcelLocation(location) ||
     typeof note !== "string" ||
     typeof residentName !== "string"
   ) {
+    error="input error"
     return Response.json(
       {
-        error: " id, courier and location are required",
+        error
       },
       { status: 400 }
     );
   }
+  
+  if (!isParcelCourier(courier)) {
+    error = "courier error";
+  } else if (!isParcelLocation(location)) {
+    error = "location error";
+  } else if (!residentsNames.includes(residentName)) {
+    error = "resident error";
+  }
+  if (error) return Response.json({ error }, { status: 400 });
   const resident = getResidentByName(residentName);
-  if (!resident) {
-    return Response.json(
-      {
-        error: "resident does not exist",
-      },
-      { status: 400 }
-    );
-  }
-
   const newParcel = {
     id,
     courier,
@@ -54,6 +56,35 @@ export async function action({ request }: ActionFunctionArgs) {
 }
 
 export default function NewParcel() {
+  const actionData = useActionData<typeof action>();
+
+  const [courierError, setCourierError] = useState(false);
+  const [residentError, setResidentError] = useState(false);
+  const [locationError, setLocationError] = useState(false);
+
+  function handleSubmit(e: FormEvent<HTMLFormElement>) {
+    const courier = e.currentTarget.elements.namedItem(
+      "courier"
+    ) as HTMLInputElement;
+    const resident = e.currentTarget.elements.namedItem(
+      "resident"
+    ) as HTMLInputElement;
+    const location = e.currentTarget.elements.namedItem(
+      "location"
+    ) as HTMLInputElement;
+
+    if (!isParcelCourier(courier.value)) {
+      setCourierError(true);
+      e.preventDefault();
+    } else if (!residentsNames.includes(resident.value)) {
+      setResidentError(true);
+      e.preventDefault();
+    } else if (!isParcelLocation(location.value)) {
+      setLocationError(true);
+      e.preventDefault();
+    }
+  }
+
   return (
     <div className="bg-white h-[100%] w-[30%] absolute right-0 rounded-sm">
       <div className="flex flex-col">
@@ -66,7 +97,7 @@ export default function NewParcel() {
           </div>
         </div>
         <div className="flex flex-col p-5">
-          <Form method="post">
+          <Form method="post" onSubmit={handleSubmit}>
             <div className="mb-8">
               {" "}
               <label htmlFor="id" className="block text-sm mb-2">
@@ -94,6 +125,9 @@ export default function NewParcel() {
                 id="courier"
                 list="courier-list"
                 defaultValue=""
+                onFocus={() => {
+                  courierError && setCourierError(false);
+                }}
               />
               <datalist id="courier-list">
                 {" "}
@@ -105,6 +139,15 @@ export default function NewParcel() {
                   );
                 })}
               </datalist>
+              <div
+                className={`text-red-500 text-sm ${
+                  courierError || actionData?.error === "courier error"
+                    ? ""
+                    : "hidden"
+                }`}
+              >
+                * courier must be in the list
+              </div>
             </div>
             <div className="mb-8">
               <label htmlFor="resident" className="block">
@@ -119,14 +162,23 @@ export default function NewParcel() {
                 type="text"
               />
               <datalist id="resident-list">
-                {residentsData.map((resident) => {
+                {residentsNames.map((residentName) => {
                   return (
-                    <option key={resident.id} value={resident.name}>
-                      {resident.name}
+                    <option key={Math.random()} value={residentName}>
+                      {residentName}
                     </option>
                   );
                 })}
               </datalist>
+              <div
+                className={`text-red-500 text-sm ${
+                  residentError || actionData?.error === "resident error"
+                    ? ""
+                    : "hidden"
+                }`}
+              >
+                * resident must be in the list
+              </div>
             </div>
             <div className="mb-8">
               {" "}
@@ -150,6 +202,15 @@ export default function NewParcel() {
                     </option>
                   );
                 })}
+                <div
+                  className={`text-red-500 text-sm ${
+                    locationError || actionData?.error === "location error"
+                      ? ""
+                      : "hidden"
+                  }`}
+                >
+                  * location must be in the list
+                </div>
               </select>
             </div>
             <div className="mb-8">

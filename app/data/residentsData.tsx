@@ -4,6 +4,8 @@ import data from "./residents.json";
 const residentsData = data as Resident[];
 export default residentsData;
 
+
+export const residentsNames = residentsData.map(resident => resident.name);
 export function getResidents(name?: string) {
   if (!name) {
     return residentsData;
