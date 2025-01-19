@@ -86,7 +86,7 @@ export default function NewParcel() {
   }
 
   return (
-    <div className="bg-white h-[100%] w-[30%] absolute right-0 rounded-sm">
+    <div className="bg-white h-[100%] w-[460px] absolute right-0 rounded-sm">
       <div className="flex flex-col">
         <div className="h-14 border-b-2 flex items-center">
           <div className="ml-5  mb-2">
