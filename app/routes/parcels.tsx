@@ -13,9 +13,7 @@ import { pickParcel } from "~/data/parcelsData";
 
 export async function action({ request }: ActionFunctionArgs) {
   const data = await request.formData();
-  const id = data.get("status");
-  console.log("action");
-  console.log(id);
+  const id = data.get("status-id");
   if (!id || typeof id !== "string") {
     return Response.json({ error: "id issue" }, { status: 400 });
   }
@@ -131,7 +129,7 @@ export function TableRow({ parcel }: { parcel: Parcel }) {
         <fetcher.Form onSubmit={(e) => handleSubmit(e)} method="post">
           {" "}
           <button
-            name="status"
+            name="status-id"
             value={parcel.id}
             disabled={parcel.status === "picked up"}
             className="disabled:opacity-50"
@@ -143,7 +141,6 @@ export function TableRow({ parcel }: { parcel: Parcel }) {
       <div className="flex items-center min-w-[200px]">
         <Link to={`./${parcel.id}/edit`}>Edit</Link>
       </div>
-      {/* <div className="flex items-center ml-8 text-white ">d</div> */}
     </div>
   );
 }
