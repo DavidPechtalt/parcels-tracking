@@ -181,12 +181,12 @@ export default function ParcelForm({ parcelData }: { parcelData?: Parcel }) {
             </div>
             <div className="mb-8">
               {" "}
-              <label htmlFor="note" className="block">
-                Note
+              <label htmlFor="notes" className="block">
+                Notes
               </label>
               <textarea
-                name="note"
-                id="note"
+                name="notes"
+                id="notes"
                 className="border-gray-400  w-[100%] rounded-md h-16 outline-gray-700 ring-1 ring-gray-400"
                 defaultValue={parcelData?.notes || ""}
               />

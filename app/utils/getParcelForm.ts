@@ -8,14 +8,14 @@ export default function getParcelFormVal(formData: FormData) {
   const id = formData.get("id");
   const courier = formData.get("courier");
   const location = formData.get("location");
-  const note = formData.get("note");
+  const notes = formData.get("notes");
   const residentName = formData.get("resident");
   let error: ParcelFormError | undefined;
   if (
     typeof id !== "string" ||
     typeof courier !== "string" ||
     typeof location !== "string" ||
-    typeof note !== "string" ||
+    typeof notes !== "string" ||
     typeof residentName !== "string"
   ) {
     error = "input error";
@@ -35,7 +35,7 @@ export default function getParcelFormVal(formData: FormData) {
     id,
     courier,
     location,
-    note,
+    notes,
     resident,
   };
 }
