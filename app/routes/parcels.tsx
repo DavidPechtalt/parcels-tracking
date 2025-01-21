@@ -34,16 +34,16 @@ export default function Parcels() {
   return (
     <div className="flex flex-col items-center justify-center h-screen bg-[#071333]">
       <div className="flex-grow"></div>
-      <div className="w-[100%] flex justify-between mb-7">
+      <div className="w-[100%] flex justify-between mb-7 ">
         <div className="flex ml-24 space-x-5">
-          <input type="date" className="rounded-lg w-40 "></input>
-          <select defaultValue="" className="rounded-lg w-40">
+          <input type="date" className="rounded-lg w-40 px-2"></input>
+          <select defaultValue="" className="rounded-lg w-40 px-2">
             <option value="">status</option>
             <option>picked</option>
             <option>pending</option>
           </select>
           
-          <select defaultValue="" className="rounded-lg w-40">
+          <select defaultValue="" className="rounded-lg w-40 px-2">
             <option value="">building</option>
             <option>High Street 34</option>
             <option>Prince Consort 22</option>
