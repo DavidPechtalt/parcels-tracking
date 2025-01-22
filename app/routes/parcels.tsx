@@ -1,5 +1,5 @@
 import type { Parcel } from "~/types/parcel";
-import parcelsData from "../data/parcels.json";
+import units from "../data/units.json";
 import {
   Link,
   Outlet,
@@ -8,14 +8,14 @@ import {
   useLoaderData,
 } from "@remix-run/react";
 import { FormEvent } from "react";
-import { ActionFunctionArgs } from "@remix-run/node";
-import { pickParcel } from "~/data/parcelsData";
+import { ActionFunctionArgs, LoaderFunctionArgs } from "@remix-run/node";
+import { getParcels, pickParcel } from "~/data/parcelsData";
 
 export async function action({ request }: ActionFunctionArgs) {
   const data = await request.formData();
   const id = data.get("status-id");
-  const startDate = data.get("start-date")
-  console.log(startDate)
+  const startDate = data.get("start-date");
+  console.log(startDate);
   if (!id || typeof id !== "string") {
     return Response.json({ error: "id issue" }, { status: 400 });
   }
@@ -25,66 +25,108 @@ export async function action({ request }: ActionFunctionArgs) {
 
   return redirect(".");
 }
-export function loader() {
-  const parcels = parcelsData as Parcel[];
-  return parcels;
+export async function loader({ request }: LoaderFunctionArgs) {
+  const properties = units.map((unit) => `${unit.street} ${unit.number}`);
+  const url = new URL(request.url);
+  const query = url.searchParams;
+  const filters = {
+    startDate: query.get("start-date") || undefined,
+    endDay: query.get("end-date") || undefined,
+    status: query.get("status") || undefined,
+    property: query.get("property") || undefined,
+  };
+  return { parcels: getParcels(filters), properties };
 }
 
 export default function Parcels() {
-  const parcels: Parcel[] = useLoaderData<typeof loader>();
+  const loaderData = useLoaderData<typeof loader>();
+  const { parcels, properties } = loaderData;
   const fetcher = useFetcher();
 
   return (
     <div className="flex flex-col items-center justify-center h-screen bg-[#071333]">
       <div className="flex-grow"></div>
       <div className="w-[90%] max-w-[90%] min-w-[90%] flex justify-between mb-7 ">
-        <div className="flex  space-x-5 items-end">
-          <div>
-            {" "}
-            <fetcher.Form className="flex flex-col" method="get">
-              <label
-                className="text-white text-sm mb-1 ml-2"
-                htmlFor="start-date"
-              >
-                start date
-              </label>
-              <input
-                name="start-date"
-                id="start-date"
-                type="date"
-                className="rounded-lg w-40 px-2 h-8 "
-                onChange={(e) => e.target.form?.submit()}
-              />
-            </fetcher.Form>
-          </div>
-          <div>
-            <fetcher.Form className="flex flex-col">
+        <div className="flex ">
+          <fetcher.Form method="get" className="flex space-x-5 items-end">
+            <div>
               {" "}
-              <div className="text-white text-sm mb-1 ml-2">end date</div>
-              <input type="date" className="rounded-lg w-40 px-2 h-8" />
-            </fetcher.Form>
-          </div>
-          <div>
-            <fetcher.Form className="flex flex-col">
-              <div className="text-white text-sm mb-1 ml-2">status</div>
-              <select defaultValue="" className="rounded-lg w-40 px-2 h-8">
-                <option value="">--status--</option>
-                <option>picked</option>
-                <option>pending</option>
-              </select>
-            </fetcher.Form>
-          </div>
-          <div>
-            {" "}
-            <fetcher.Form className="flex flex-col">
-              <div className="text-white text-sm mb-1 ml-2">property</div>
-              <select defaultValue="" className="rounded-lg w-40 px-2 h-8">
-                <option value="">--building--</option>
-                <option>High Street 34</option>
-                <option>Prince Consort 22</option>
-              </select>
-            </fetcher.Form>
-          </div>
+              <div className="flex flex-col">
+                <label
+                  className="text-white text-sm mb-1 ml-2"
+                  htmlFor="start-date"
+                >
+                  start date
+                </label>
+                <input
+                  name="start-date"
+                  id="start-date"
+                  type="date"
+                  className="rounded-lg w-40 px-2 h-8 "
+                  onChange={(e) => e.target.form?.submit()}
+                />
+              </div>
+            </div>
+            <div>
+              <div className="flex flex-col">
+                <label
+                  htmlFor="end-date"
+                  className="text-white text-sm mb-1 ml-2"
+                >
+                  end date
+                </label>
+                <input
+                  name="end-date"
+                  id="end-date"
+                  type="date"
+                  className="rounded-lg w-40 px-2 h-8"
+                  onChange={(e) => e.target.form?.submit()}
+                />
+              </div>
+            </div>
+            <div>
+              <div className="flex flex-col">
+                <label
+                  htmlFor="status"
+                  className="text-white text-sm mb-1 ml-2"
+                >
+                  status
+                </label>
+                <select
+                  name="status"
+                  id="status"
+                  onChange={(e) => e.target.form?.submit()}
+                  defaultValue=""
+                  className="rounded-lg w-40 px-2 h-8"
+                >
+                  <option value="">--status--</option>
+                  <option value="picked up">picked up</option>
+                  <option value="pending">pending</option>
+                </select>
+              </div>
+            </div>
+            <div>
+              {" "}
+              <div className="flex flex-col">
+                <div className="text-white text-sm mb-1 ml-2">property</div>
+                <select
+                  defaultValue=""
+                  className="rounded-lg w-40 px-2 h-8"
+                  onChange={(e) => e.target.form?.submit()}
+                  name="property"
+                >
+                  <option value="">--building--</option>
+                  {properties.map((property) => {
+                    return (
+                      <option key={property} value={property}>
+                        {property}
+                      </option>
+                    );
+                  })}
+                </select>
+              </div>
+            </div>{" "}
+          </fetcher.Form>
         </div>
         <div className="h-8 bg-orange-500 mt-6 px-2  min-w-fit flex justify-center items-center text-white rounded-lg">
           {" "}
