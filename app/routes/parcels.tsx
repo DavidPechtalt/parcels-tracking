@@ -14,6 +14,8 @@ import { pickParcel } from "~/data/parcelsData";
 export async function action({ request }: ActionFunctionArgs) {
   const data = await request.formData();
   const id = data.get("status-id");
+  const startDate = data.get("start-date")
+  console.log(startDate)
   if (!id || typeof id !== "string") {
     return Response.json({ error: "id issue" }, { status: 400 });
   }
@@ -30,27 +32,61 @@ export function loader() {
 
 export default function Parcels() {
   const parcels: Parcel[] = useLoaderData<typeof loader>();
+  const fetcher = useFetcher();
 
   return (
     <div className="flex flex-col items-center justify-center h-screen bg-[#071333]">
       <div className="flex-grow"></div>
-      <div className="w-[100%] flex justify-between mb-7 ">
-        <div className="flex ml-24 space-x-5">
-          <input type="date" className="rounded-lg w-40 px-2"></input>
-          <select defaultValue="" className="rounded-lg w-40 px-2">
-            <option value="">status</option>
-            <option>picked</option>
-            <option>pending</option>
-          </select>
-          
-          <select defaultValue="" className="rounded-lg w-40 px-2">
-            <option value="">building</option>
-            <option>High Street 34</option>
-            <option>Prince Consort 22</option>
-          </select>
-          
+      <div className="w-[90%] max-w-[90%] min-w-[90%] flex justify-between mb-7 ">
+        <div className="flex  space-x-5 items-end">
+          <div>
+            {" "}
+            <fetcher.Form className="flex flex-col" method="get">
+              <label
+                className="text-white text-sm mb-1 ml-2"
+                htmlFor="start-date"
+              >
+                start date
+              </label>
+              <input
+                name="start-date"
+                id="start-date"
+                type="date"
+                className="rounded-lg w-40 px-2 h-8 "
+                onChange={(e) => e.target.form?.submit()}
+              />
+            </fetcher.Form>
+          </div>
+          <div>
+            <fetcher.Form className="flex flex-col">
+              {" "}
+              <div className="text-white text-sm mb-1 ml-2">end date</div>
+              <input type="date" className="rounded-lg w-40 px-2 h-8" />
+            </fetcher.Form>
+          </div>
+          <div>
+            <fetcher.Form className="flex flex-col">
+              <div className="text-white text-sm mb-1 ml-2">status</div>
+              <select defaultValue="" className="rounded-lg w-40 px-2 h-8">
+                <option value="">--status--</option>
+                <option>picked</option>
+                <option>pending</option>
+              </select>
+            </fetcher.Form>
+          </div>
+          <div>
+            {" "}
+            <fetcher.Form className="flex flex-col">
+              <div className="text-white text-sm mb-1 ml-2">property</div>
+              <select defaultValue="" className="rounded-lg w-40 px-2 h-8">
+                <option value="">--building--</option>
+                <option>High Street 34</option>
+                <option>Prince Consort 22</option>
+              </select>
+            </fetcher.Form>
+          </div>
         </div>
-        <div className="h-8 bg-orange-500 px-2 mr-24 flex justify-center items-center text-white rounded-lg">
+        <div className="h-8 bg-orange-500 mt-6 px-2  min-w-fit flex justify-center items-center text-white rounded-lg">
           {" "}
           <Link to={`./new`}> New Package</Link>
         </div>
