@@ -247,7 +247,7 @@ export function TableRow({ parcel }: { parcel: Parcel }) {
       </div>
       <div className="flex items-center ml-9  min-w-[214px]">
         <div
-          className={`rounded-xl w-20 flex justify-center  ${
+          className={`rounded-xl w-24 flex justify-center  ${
             parcel.status === "pending" ? "bg-red-200" : "bg-green-200"
           }  py-0.5`}
         >
