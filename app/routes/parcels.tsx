@@ -16,8 +16,6 @@ import { getParcels, pickParcel } from "~/data/parcelsData";
 export async function action({ request }: ActionFunctionArgs) {
   const data = await request.formData();
   const id = data.get("status-id");
-  const startDate = data.get("start-date");
-  console.log(startDate);
   if (!id || typeof id !== "string") {
     return Response.json({ error: "id issue" }, { status: 400 });
   }
