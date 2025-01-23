@@ -1,11 +1,13 @@
 import type { Parcel } from "~/types/parcel";
 import units from "../data/units.json";
 import {
+  Form,
   Link,
   Outlet,
   redirect,
   useFetcher,
   useLoaderData,
+  useSubmit,
 } from "@remix-run/react";
 import { FormEvent } from "react";
 import { ActionFunctionArgs, LoaderFunctionArgs } from "@remix-run/node";
@@ -41,14 +43,32 @@ export async function loader({ request }: LoaderFunctionArgs) {
 export default function Parcels() {
   const loaderData = useLoaderData<typeof loader>();
   const { parcels, properties } = loaderData;
-  const fetcher = useFetcher();
+  const submit = useSubmit();
+  function handleSubmit(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    for (const [key, value] of formData.entries()) {
+      if (!value) {
+        formData.delete(key);
+      }
+    }
+    // in the iteration it skips over the third value if I try to delte it! so I need to do it manually.
+    if (!formData.get("status")) {
+      formData.delete("status");
+    }
+    submit(formData);
+  }
 
   return (
     <div className="flex flex-col items-center justify-center h-screen bg-[#071333]">
       <div className="flex-grow"></div>
       <div className="w-[90%] max-w-[90%] min-w-[90%] flex justify-between mb-7 ">
         <div className="flex ">
-          <fetcher.Form method="get" className="flex space-x-5 items-end">
+          <Form
+            className="flex space-x-5 items-end"
+            onSubmit={(e) => handleSubmit(e)}
+            method="get"
+          >
             <div>
               {" "}
               <div className="flex flex-col">
@@ -63,7 +83,7 @@ export default function Parcels() {
                   id="start-date"
                   type="date"
                   className="rounded-lg w-40 px-2 h-8 "
-                  onChange={(e) => e.target.form?.submit()}
+                  onChange={(e) => e.target.form?.requestSubmit()}
                 />
               </div>
             </div>
@@ -80,24 +100,24 @@ export default function Parcels() {
                   id="end-date"
                   type="date"
                   className="rounded-lg w-40 px-2 h-8"
-                  onChange={(e) => e.target.form?.submit()}
+                  onChange={(e) => e.target.form?.requestSubmit()}
                 />
               </div>
             </div>
             <div>
               <div className="flex flex-col">
-                <label
-                  htmlFor="status"
+                <div
+                  // htmlFor="status"
                   className="text-white text-sm mb-1 ml-2"
                 >
                   status
-                </label>
+                </div>
                 <select
-                  name="status"
-                  id="status"
-                  onChange={(e) => e.target.form?.submit()}
+                  // id="status"
                   defaultValue=""
                   className="rounded-lg w-40 px-2 h-8"
+                  onChange={(e) => e.target.form?.requestSubmit()}
+                  name="status"
                 >
                   <option value="">--status--</option>
                   <option value="picked up">picked up</option>
@@ -112,7 +132,7 @@ export default function Parcels() {
                 <select
                   defaultValue=""
                   className="rounded-lg w-40 px-2 h-8"
-                  onChange={(e) => e.target.form?.submit()}
+                  onChange={(e) => e.target.form?.requestSubmit()}
                   name="property"
                 >
                   <option value="">--building--</option>
@@ -126,7 +146,7 @@ export default function Parcels() {
                 </select>
               </div>
             </div>{" "}
-          </fetcher.Form>
+          </Form>
         </div>
         <div className="h-8 bg-orange-500 mt-6 px-2  min-w-fit flex justify-center items-center text-white rounded-lg">
           {" "}
