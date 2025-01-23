@@ -44,7 +44,7 @@ export default function Parcels() {
   const submit = useSubmit();
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    
+
     const formData = new FormData(e.currentTarget);
 
     for (const [key, value] of formData.entries()) {
@@ -57,27 +57,28 @@ export default function Parcels() {
       formData.delete("status");
     }
     //the property is the third value when choosing end day
-    if(!formData.get("property")){
-      formData.delete("property")
+    if (!formData.get("property")) {
+      formData.delete("property");
     }
     submit(formData);
   }
 
-    function handleReset(){
-      const formData = new FormData()
-      submit(formData)
-    }
+  function handleReset() {
+    const formData = new FormData();
+    submit(formData);
+  }
 
   return (
     <div className="flex flex-col items-center justify-center h-screen bg-[#071333]">
       <div className="flex-grow"></div>
-      <div className="w-[90%] max-w-[90%] min-w-[90%] flex justify-between mb-7 ">
+      <div className="max-w-[90%]   overflow-x-auto flex flex-col  scrollbar py-2 h-[75%] ">
+      <div className=" flex justify-between mb-7 px-2 sticky right-0 left-0">
         <div className="flex ">
           <Form
             className="flex space-x-5 items-end"
             onSubmit={(e) => handleSubmit(e)}
             method="get"
-            onReset={()=>handleReset()}
+            onReset={() => handleReset()}
           >
             <div>
               {" "}
@@ -156,7 +157,12 @@ export default function Parcels() {
                 </select>
               </div>
             </div>{" "}
-            <button className="bg-red-400 rounded-lg h-8 w-16 flex items-center justify-center" type="reset">reset</button>
+            <button
+              className="bg-red-400 rounded-lg h-8 w-16 flex items-center justify-center text-white"
+              type="reset"
+            >
+              reset
+            </button>
           </Form>
         </div>
         <div className="h-8 bg-orange-500 mt-6 px-2  min-w-fit flex justify-center items-center text-white rounded-lg">
@@ -167,13 +173,14 @@ export default function Parcels() {
       {<Table parcels={parcels} />}
       <Outlet context={parcels} />
       <div className="h-1"></div>
+      </div>
     </div>
   );
 }
 
 export function Table({ parcels }: { parcels: Parcel[] }) {
   return (
-    <div className="max-w-[90%]   overflow-x-auto flex flex-col  scrollbar py-2 h-[65%]">
+    <div >
       <div className="min-w-[1650px] flex w-[1450px] min-h-14 h-14 px-4  mb-4 rounded-lg text-white text-lg bg-black">
         {" "}
         <div className="flex items-center min-w-[214px] ">
@@ -194,10 +201,10 @@ export function Table({ parcels }: { parcels: Parcel[] }) {
         <div className="flex ml-9 items-center min-w-[214px] ">
           <div className="w-[100%]">Status</div>
         </div>
-        <div className="flex items-center min-w-[214px] ">
+        <div className="flex items-center min-w-[200px] ">
           <div className="w-[100%]">Pick</div>
         </div>
-        <div className="flex items-center  min-w-[214px]">
+        <div className="flex items-center  min-w-[114px]">
           <div className="w-[100%]">Edit</div>
         </div>
       </div>
