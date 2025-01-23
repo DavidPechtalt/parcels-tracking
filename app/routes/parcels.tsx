@@ -46,18 +46,29 @@ export default function Parcels() {
   const submit = useSubmit();
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    
     const formData = new FormData(e.currentTarget);
+
     for (const [key, value] of formData.entries()) {
       if (!value) {
         formData.delete(key);
       }
     }
-    // in the iteration it skips over the third value if I try to delte it! so I need to do it manually.
+    // in the iteration it skips over the third value if I try to delete it! so I need to do it manually.
     if (!formData.get("status")) {
       formData.delete("status");
     }
+    //the property is the third value when choosing end day
+    if(!formData.get("property")){
+      formData.delete("property")
+    }
     submit(formData);
   }
+
+    function handleReset(){
+      const formData = new FormData()
+      submit(formData)
+    }
 
   return (
     <div className="flex flex-col items-center justify-center h-screen bg-[#071333]">
@@ -68,6 +79,7 @@ export default function Parcels() {
             className="flex space-x-5 items-end"
             onSubmit={(e) => handleSubmit(e)}
             method="get"
+            onReset={()=>handleReset()}
           >
             <div>
               {" "}
@@ -146,6 +158,7 @@ export default function Parcels() {
                 </select>
               </div>
             </div>{" "}
+            <button className="bg-red-400 rounded-lg h-8 w-16 flex items-center justify-center" type="reset">reset</button>
           </Form>
         </div>
         <div className="h-8 bg-orange-500 mt-6 px-2  min-w-fit flex justify-center items-center text-white rounded-lg">
