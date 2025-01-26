@@ -69,7 +69,7 @@ export default function Parcels() {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen bg-[#071333]">
+    <div className="select-none flex flex-col items-center justify-center h-screen bg-[#071333]">
       <div className="flex-grow"></div>
       <div className="w-[90%] max-w-[1666px] flex justify-between mb-7 px-2 ">
         <div className="flex ">
