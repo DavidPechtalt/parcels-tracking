@@ -69,9 +69,8 @@ export default function Parcels() {
   }
 
   return (
-    <div className="select-none flex flex-col items-center justify-center h-screen bg-[#071333]">
-      <div className="flex-grow"></div>
-      <div className="w-[90%] max-w-[1666px] flex justify-between mb-7 px-2 ">
+    <div className="select-none flex flex-col items-center  h-screen bg-[#071333]">
+      <div className="w-[90%] max-w-[1666px] flex justify-between mb-7 px-2 mt-64">
         <div className="flex ">
           <Form
             className="flex space-x-5 items-end"
@@ -178,7 +177,7 @@ export default function Parcels() {
 
 export function Table({ parcels }: { parcels: Parcel[] }) {
   return (
-    <div className="max-w-[90%]   overflow-x-auto flex flex-col  scrollbar py-2 h-[65%]">
+    <div className="max-w-[90%]   overflow-x-auto flex flex-col  scrollbar py-2 max-h-[65%]">
       <div className="min-w-[1650px] flex w-[1450px] min-h-14 h-14 px-4  mb-4 rounded-lg text-white text-lg bg-black">
         {" "}
         <div className="flex items-center min-w-[214px] ">
