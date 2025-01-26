@@ -23,7 +23,7 @@ export async function action({ request }: ActionFunctionArgs) {
     return Response.json({ error: "wrong parcel id" }, { status: 400 });
   }
 
-  return redirect(".");
+  return redirect(request.url);
 }
 export async function loader({ request }: LoaderFunctionArgs) {
   const properties = units.map((unit) => `${unit.street} ${unit.number}`);
