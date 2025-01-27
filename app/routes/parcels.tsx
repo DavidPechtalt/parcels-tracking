@@ -48,18 +48,13 @@ export default function Parcels() {
     const formData = new FormData(e.currentTarget);
 
     for (const [key, value] of formData.entries()) {
-      if (!value) {
-        formData.delete(key);
-      }
+      !value && formData.delete(key);
     }
+
     // in the iteration it skips over the third value if I try to delete it! so I need to do it manually.
-    if (!formData.get("status")) {
-      formData.delete("status");
-    }
+    !formData.get("status") && formData.delete("status");
     //the property is the third value when choosing end day
-    if (!formData.get("property")) {
-      formData.delete("property");
-    }
+    !formData.get("property") && formData.delete("property");
     submit(formData);
   }
 
