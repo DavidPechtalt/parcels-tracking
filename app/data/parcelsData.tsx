@@ -23,7 +23,6 @@ export function getParcels(filters: Filters) {
     );
   }
   if (filters.property) {
-    console.log();
     filteredParcels = filteredParcels.filter((parcel) => {
       return (
         filters.property ===
