@@ -55,6 +55,7 @@ export default function Parcels() {
     !formData.get("status") && formData.delete("status");
     //the property is the third value when choosing end day
     !formData.get("property") && formData.delete("property");
+    !formData.get("end-date")&& formData.delete("end-date")
     submit(formData);
   }
 
