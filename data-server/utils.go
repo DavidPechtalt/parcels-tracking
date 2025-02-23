@@ -44,25 +44,21 @@ func filterParcels(parcels []Parcel, filters Filters) []Parcel {
 		parcels = filter(parcels, func(p Parcel) bool {
 			return p.ArrivedIn > *filters.Startdate
 		})
-		fmt.Println(parcels)
 	}
 	if filters.Enddate != nil {
 		parcels = filter(parcels, func(p Parcel) bool {
 			return p.ArrivedIn < *filters.Enddate
 		})
-		fmt.Println(parcels)
 	}
 	if filters.Status != nil {
 		parcels = filter(parcels, func(p Parcel) bool {
 			return p.Status == *filters.Status
 		})
-		fmt.Println(parcels)
 	}
 	if filters.Property != nil {
 		parcels = filter(parcels, func(p Parcel) bool {
 			return fmt.Sprintf("%s %s", p.Resident.Unit.Street, p.Resident.Unit.Number) == *filters.Property
 		})
-		fmt.Println(parcels)
 	}
 	return parcels
 }
