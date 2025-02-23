@@ -7,6 +7,7 @@ import {
   redirect,
   useFetcher,
   useLoaderData,
+  useLocation,
   useSubmit,
 } from "@remix-run/react";
 import { FormEvent } from "react";
@@ -35,11 +36,17 @@ export async function loader({ request }: LoaderFunctionArgs) {
     status: query.get("status") || undefined,
     property: query.get("property") || undefined,
   };
-  return { parcels: await getParcels(filters) ||[], properties };
+  return { parcels: (await getParcels(filters)) || [], properties };
 }
 
 export default function Parcels() {
   const loaderData = useLoaderData<typeof loader>();
+  const searchQuery = useLocation().search.split("?");
+  let urlFilters;
+  if (searchQuery.length > 1) {
+    urlFilters = searchQuery[1].split("&");
+  }
+  console.log(urlFilters);
   const { parcels, properties } = loaderData;
   const submit = useSubmit();
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
@@ -61,6 +68,7 @@ export default function Parcels() {
 
   function handleReset() {
     const formData = new FormData();
+    urlFilters = searchQuery[1].split("&");
     submit(formData);
   }
 
@@ -84,6 +92,11 @@ export default function Parcels() {
                   start date
                 </label>
                 <input
+                  defaultValue={
+                    urlFilters
+                      ?.find((s) => s.includes("start-date"))
+                      ?.split("=")[1]
+                  }
                   name="start-date"
                   id="start-date"
                   type="date"
@@ -101,6 +114,11 @@ export default function Parcels() {
                   end date
                 </label>
                 <input
+                  defaultValue={
+                    urlFilters
+                      ?.find((s) => s.includes("end-date"))
+                      ?.split("=")[1]
+                  }
                   name="end-date"
                   id="end-date"
                   type="date"
@@ -118,8 +136,11 @@ export default function Parcels() {
                   status
                 </div>
                 <select
-                  // id="status"
-                  defaultValue=""
+                  defaultValue={urlFilters
+                    ?.find((s) => s.includes("status"))
+                    ?.split("=")[1]
+                    ?.split("+")
+                    ?.join(" ")}
                   className="rounded-lg w-40 px-2 h-8"
                   onChange={(e) => e.target.form?.requestSubmit()}
                   name="status"
@@ -135,7 +156,11 @@ export default function Parcels() {
               <div className="flex flex-col">
                 <div className="text-white text-sm mb-1 ml-2">property</div>
                 <select
-                  defaultValue=""
+                  defaultValue={urlFilters
+                    ?.find((s) => s.includes("property"))
+                    ?.split("=")[1]
+                    ?.split("+")
+                    ?.join(" ")}
                   className="rounded-lg w-40 px-2 h-8"
                   onChange={(e) => e.target.form?.requestSubmit()}
                   name="property"
