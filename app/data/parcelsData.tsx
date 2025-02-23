@@ -1,37 +1,17 @@
 import data from "./parcels.json";
 import { Parcel } from "../types/parcel";
 import { Filters } from "~/types/fitlers";
+import axios from "axios";
 
 const parcels = data as Parcel[];
 export default parcels;
 
-export function getParcels(filters: Filters) {
-  let filteredParcels = parcels;
-  if (filters.startDate) {
-    filteredParcels = filteredParcels.filter(
-      (parcel) => new Date(parcel.arrivedIn) > new Date(filters.startDate!)
-    );
-  }
-  if (filters.endDate) {
-    filteredParcels = filteredParcels.filter(
-      (parcel) => new Date(parcel.arrivedIn) > new Date(filters.endDate!)
-    );
-  }
-  if (filters.status) {
-    filteredParcels = filteredParcels.filter(
-      (parcel) => parcel.status === filters.status
-    );
-  }
-  if (filters.property) {
-    filteredParcels = filteredParcels.filter((parcel) => {
-      return (
-        filters.property ===
-        `${parcel.resident.unit.street} ${parcel.resident.unit.number}`
-      );
-    });
-  }
+export async function getParcels(filters: Filters) {
+  const parcelsData = (
+    await axios.get(`${process.env.DATASERVER_URL}/parcels`, { data: filters })
+  ).data as Parcel[];
 
-  return filteredParcels;
+  return parcelsData;
 }
 
 export function addParcel(parcel: Parcel) {

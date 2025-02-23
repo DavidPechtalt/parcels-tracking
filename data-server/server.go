@@ -1,28 +1,27 @@
 package main
 
 import (
-	"os"
-
+	"encoding/json"
+	"io"
 	"net/http"
 )
 
 func getParcels(w http.ResponseWriter, req *http.Request) {
-	filename := "data/parcels.json"
-	data, err := readJSONFile(filename)
-
+	data, _ := readJSONFile("../app/data/parcels.json")
+	parcels, _ := parseJSON[Parcel](data)
+	var filters Filters
+	fil, err := io.ReadAll(req.Body)
 	if err != nil {
-		if os.IsNotExist(err) {
-			http.Error(w, "file not found", http.StatusNotFound)
-		} else {
-			http.Error(w, "internal server error", http.StatusInternalServerError)
-		}
-
-		return
+		http.Error(w, "bad request", http.StatusBadRequest)
 	}
-	w.Header().Set("Content-Type", "application/json")
-	w.Write(data)
+	err = json.Unmarshal(fil, &filters)
+	if err != nil {
+		http.Error(w, "bad request", http.StatusBadRequest)
+	}
+	parcels = filterParcels(parcels, filters)
+	res, _ := toJSON[Parcel](parcels)
+	w.Write(res)
 }
-
 
 func main() {
 
