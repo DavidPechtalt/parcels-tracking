@@ -1,0 +1,632 @@
+[
+    {
+        "id": "7449deac-08fd-42ae-8d94-f34724e337ca",
+        "resident": {
+            "id": "2dee055d-940f-41b1-bc3c-cd416798ed27",
+            "name": "Olivia Harris",
+            "unit": {
+                "id": "d93303c1-1435-4389-8812-56f381721c08",
+                "street": "Willow Drive",
+                "number": "4561"
+            },
+            "img": {
+                "src": "/2.jpg",
+                "alt": "Profile picture",
+                "id": "90b4d83d-41ef-46c9-8ca2-83aadd4e312b"
+            }
+        },
+        "courier": "DHL",
+        "arrivedIn": "2024-12-10T11:39:51.029095",
+        "location": "Behind the reception counter",
+        "status": "picked up"
+    },
+    {
+        "id": "89e71268-b7d0-4ef1-89c8-d86afde57781",
+        "resident": {
+            "id": "ac1247aa-1161-4ab5-aed6-96b95e34dd50",
+            "name": "John Harris",
+            "unit": {
+                "id": "958a51a9-cccd-48e8-898c-31fdc0d30287",
+                "street": "Willow Drive",
+                "number": "4712"
+            },
+            "img": {
+                "src": "/3.jpg",
+                "alt": "Profile picture",
+                "id": "44ad9c17-d49b-4284-9e47-82072a77bff8"
+            }
+        },
+        "courier": "Aramex",
+        "arrivedIn": "2024-12-24T11:39:51.029119",
+        "location": "Storage room",
+        "status": "pending"
+    },
+    {
+        "id": "373508ae-da3f-4f3f-8603-7a23747f6557",
+        "resident": {
+            "id": "aaa8a326-58da-468d-9586-ba92322dc973",
+            "name": "Jane Brown",
+            "unit": {
+                "id": "106cf57f-a649-4b6e-a102-cc5155b14227",
+                "street": "Oak Street",
+                "number": "5301"
+            },
+            "img": {
+                "src": "/7.jpg",
+                "alt": "Profile picture",
+                "id": "fd7b88eb-5690-410d-b997-2d886295b848"
+            }
+        },
+        "courier": "Japan Post",
+        "arrivedIn": "2025-01-02T11:39:51.029128",
+        "location": "Parcel locker #2",
+        "status": "picked up"
+    },
+    {
+        "id": "85d20fae-0cef-44ae-963c-0a084f2b4de8",
+        "resident": {
+            "id": "d34e96a4-fb9e-4f7d-85d1-b4750e820c5d",
+            "name": "James Martin",
+            "unit": {
+                "id": "2b33b349-b27e-4966-93bc-c1ab3953946f",
+                "street": "Oak Street",
+                "number": "6807"
+            },
+            "img": {
+                "src": "/1.jpg",
+                "alt": "Profile picture",
+                "id": "8e5568a5-b602-4f1d-b7ad-8d6bd5fc3b4c"
+            }
+        },
+        "courier": "AliExpress",
+        "arrivedIn": "2024-12-28T11:39:51.029137",
+        "location": "Reception desk",
+        "status": "picked up"
+    },
+    {
+        "id": "fb7cd93c-1c68-47a6-9c6c-96cd63f77f5e",
+        "resident": {
+            "id": "b52959e8-097c-4b4a-8239-ec7c13588cbb",
+            "name": "Jane Martin",
+            "unit": {
+                "id": "356b564f-8f0b-42ca-9183-8e2e8181387a",
+                "street": "Main Street",
+                "number": "5457"
+            },
+            "img": {
+                "src": "/2.jpg",
+                "alt": "Profile picture",
+                "id": "57255824-5b66-409e-87bf-6fa1d9258cdb"
+            }
+        },
+        "courier": "Japan Post",
+        "arrivedIn": "2024-12-10T11:39:51.029149",
+        "location": "Security desk",
+        "status": "pending"
+    },
+    {
+        "id": "c732daf4-1018-44ff-8a2c-cda5b6bfd132",
+        "resident": {
+            "id": "ac4b3f63-b34f-4356-93cd-f148d62f6e7a",
+            "name": "David Thomas",
+            "unit": {
+                "id": "054aa4e8-310b-4da5-8231-054d7a09ef50",
+                "street": "Elm Street",
+                "number": "7967"
+            },
+            "img": {
+                "src": "/3.jpg",
+                "alt": "Profile picture",
+                "id": "13820521-7978-4d15-b75a-1ceb04e9554f"
+            }
+        },
+        "courier": "Blue Dart",
+        "arrivedIn": "2025-01-02T11:39:51.029162",
+        "location": "Behind the reception counter",
+        "status": "pending"
+    },
+    {
+        "id": "56ece562-aa20-4120-b512-d862b955599f",
+        "resident": {
+            "id": "682913ed-279e-443c-9d55-4c3fc2a9f82b",
+            "name": "Olivia Martin",
+            "unit": {
+                "id": "4dcf3a2c-17f8-4043-8389-79213393267e",
+                "street": "Main Street",
+                "number": "975"
+            },
+            "img": {
+                "src": "/5.jpg",
+                "alt": "Profile picture",
+                "id": "eabafb77-855b-4f8c-bba2-2f0ceee7bb21"
+            }
+        },
+        "courier": "Royal Mail",
+        "arrivedIn": "2024-12-18T11:39:51.029171",
+        "location": "Shelf C",
+        "status": "pending"
+    },
+    {
+        "id": "16f70ac1-9ad2-4d1b-828c-a8ada0e439fe",
+        "resident": {
+            "id": "1590e463-8b6a-49b2-8fae-3e0cf5b268a0",
+            "name": "David Taylor",
+            "unit": {
+                "id": "94cf978f-c83e-4fe9-9109-b73053992421",
+                "street": "Oak Street",
+                "number": "1164"
+            },
+            "img": {
+                "src": "/7.jpg",
+                "alt": "Profile picture",
+                "id": "6794093c-5862-48fd-ac9d-7f5ae164302d"
+            }
+        },
+        "courier": "Japan Post",
+        "arrivedIn": "2024-12-27T11:39:51.029182",
+        "location": "Shelf A",
+        "status": "pending"
+    },
+    {
+        "id": "c9d5975b-6bbc-4025-8edf-4333f0b71cc3",
+        "resident": {
+            "id": "430d9dff-b15a-4dca-ab2d-29da861e7e0d",
+            "name": "Olivia White",
+            "unit": {
+                "id": "fa1c5352-5e26-46e3-a328-38c8640859ac",
+                "street": "Birch Boulevard",
+                "number": "7039"
+            },
+            "img": {
+                "src": "/5.jpg",
+                "alt": "Profile picture",
+                "id": "c707e60b-8998-4a69-b4e0-dec056721552"
+            }
+        },
+        "courier": "Hermes",
+        "arrivedIn": "2025-01-01T11:39:51.029190",
+        "location": "Reception desk",
+        "status": "pending"
+    },
+    {
+        "id": "ece83987-282a-410d-9778-4459860e0164",
+        "resident": {
+            "id": "e721343e-cd22-4ba9-a117-412158aa63f5",
+            "name": "John White",
+            "unit": {
+                "id": "603fdc49-e194-4761-8ac1-7d9c18fa7031",
+                "street": "Elm Street",
+                "number": "4862"
+            },
+            "img": {
+                "src": "/2.jpg",
+                "alt": "Profile picture",
+                "id": "08139409-6735-4190-8676-30249ae1924f"
+            }
+        },
+        "courier": "Yodel",
+        "arrivedIn": "2024-12-16T11:39:51.029198",
+        "location": "Security desk",
+        "status": "pending"
+    },
+    {
+        "id": "a1b54b31-6c1d-4463-b439-59acda8547dc",
+        "resident": {
+            "id": "4a4a921a-69ba-4d08-89eb-a3cf024431c1",
+            "name": "Robert White",
+            "unit": {
+                "id": "d93303c1-1435-4389-8812-56f381721c08",
+                "street": "Willow Drive",
+                "number": "4561"
+            },
+            "img": {
+                "src": "/2.jpg",
+                "alt": "Profile picture",
+                "id": "269d9324-f467-4226-99ea-0e3f7d64f753"
+            }
+        },
+        "courier": "India Post",
+        "arrivedIn": "2024-12-29T11:39:51.029206",
+        "location": "Shelf A",
+        "status": "pending"
+    },
+    {
+        "id": "d8e6e748-748f-4822-9adb-d5638b0d5f5b",
+        "resident": {
+            "id": "2c806c1c-30d4-4eeb-9146-6309f8f0908f",
+            "name": "Michael Anderson",
+            "unit": {
+                "id": "958a51a9-cccd-48e8-898c-31fdc0d30287",
+                "street": "Willow Drive",
+                "number": "4712"
+            },
+            "img": {
+                "src": "/1.jpg",
+                "alt": "Profile picture",
+                "id": "e5f6b32d-1396-4723-948b-bc64880cc4e3"
+            }
+        },
+        "courier": "Amazon",
+        "arrivedIn": "2024-12-14T11:39:51.029214",
+        "location": "Corner near the elevator",
+        "status": "pending"
+    },
+    {
+        "id": "9dc90054-b9bd-4699-996b-6f203c5d91ed",
+        "resident": {
+            "id": "99498617-0f9b-4712-b8a5-1432b8d2a6a9",
+            "name": "Sarah Jackson",
+            "unit": {
+                "id": "106cf57f-a649-4b6e-a102-cc5155b14227",
+                "street": "Oak Street",
+                "number": "5301"
+            },
+            "img": {
+                "src": "/8.jpg",
+                "alt": "Profile picture",
+                "id": "172e9205-43e7-4fc2-bd29-65fefa7f3256"
+            }
+        },
+        "courier": "GLS",
+        "arrivedIn": "2024-12-18T11:39:51.029221",
+        "location": "Parcel locker #2",
+        "status": "picked up"
+    },
+    {
+        "id": "9c756c92-5eea-40a3-91f4-023613a7b568",
+        "resident": {
+            "id": "a8764e8d-58e2-473c-94e2-870b93e3cce7",
+            "name": "Sarah Smith",
+            "unit": {
+                "id": "2b33b349-b27e-4966-93bc-c1ab3953946f",
+                "street": "Oak Street",
+                "number": "6807"
+            },
+            "img": {
+                "src": "/7.jpg",
+                "alt": "Profile picture",
+                "id": "6973b7e6-85e1-4fe0-9b6c-c9532eb45f2d"
+            }
+        },
+        "courier": "Australia Post",
+        "arrivedIn": "2024-12-18T11:39:51.029228",
+        "location": "Security desk",
+        "status": "pending"
+    },
+    {
+        "id": "8303c740-0c31-4cdb-814a-7cf577cc1751",
+        "resident": {
+            "id": "450fd943-bc39-4812-98bc-2f2a9fa495d7",
+            "name": "David Harris",
+            "unit": {
+                "id": "356b564f-8f0b-42ca-9183-8e2e8181387a",
+                "street": "Main Street",
+                "number": "5457"
+            },
+            "img": {
+                "src": "/6.jpg",
+                "alt": "Profile picture",
+                "id": "5f601217-d091-4461-b8fc-ec0b7d2bafc5"
+            }
+        },
+        "courier": "Australia Post",
+        "arrivedIn": "2024-12-29T11:39:51.029235",
+        "location": "Parcel locker #1",
+        "status": "pending"
+    },
+    {
+        "id": "2d6e4d88-e288-48e1-9726-fddb581551e9",
+        "resident": {
+            "id": "8cac7af2-9f66-4202-b835-c962be7f307f",
+            "name": "Emily Smith",
+            "unit": {
+                "id": "054aa4e8-310b-4da5-8231-054d7a09ef50",
+                "street": "Elm Street",
+                "number": "7967"
+            },
+            "img": {
+                "src": "/4.jpg",
+                "alt": "Profile picture",
+                "id": "46c4cc5d-40a3-4f7e-8e44-5bf9ae69cfd2"
+            }
+        },
+        "courier": "Royal Mail",
+        "arrivedIn": "2024-12-15T11:39:51.029251",
+        "location": "Table near the entrance",
+        "status": "pending"
+    },
+    {
+        "id": "671c1957-f693-454e-8602-4bff686ee29c",
+        "resident": {
+            "id": "e7dd7013-6edd-41d6-b0bd-b7fbc3b3de57",
+            "name": "Sarah Brown",
+            "unit": {
+                "id": "4dcf3a2c-17f8-4043-8389-79213393267e",
+                "street": "Main Street",
+                "number": "975"
+            },
+            "img": {
+                "src": "/7.jpg",
+                "alt": "Profile picture",
+                "id": "78b537b8-b256-474f-a658-68b6bfa779af"
+            }
+        },
+        "courier": "Australia Post",
+        "arrivedIn": "2025-01-01T11:39:51.029258",
+        "location": "Reception desk",
+        "status": "picked up"
+    },
+    {
+        "id": "541fcde2-4835-461b-b42e-395d6d73a3e7",
+        "resident": {
+            "id": "61fec7aa-ac99-49c8-afc0-87b3c483485e",
+            "name": "Olivia Anderson",
+            "unit": {
+                "id": "94cf978f-c83e-4fe9-9109-b73053992421",
+                "street": "Oak Street",
+                "number": "1164"
+            },
+            "img": {
+                "src": "/3.jpg",
+                "alt": "Profile picture",
+                "id": "af2fc1dc-e46b-4e86-b220-bd678f1ce58a"
+            }
+        },
+        "courier": "Aramex",
+        "arrivedIn": "2024-12-22T11:39:51.029265",
+        "location": "Parcel locker #2",
+        "status": "picked up"
+    },
+    {
+        "id": "99f842fd-a734-4ba3-bf33-fc9f7ce3629c",
+        "resident": {
+            "id": "9c3f19e2-2f77-403d-a023-c92479500e6d",
+            "name": "John Anderson",
+            "unit": {
+                "id": "fa1c5352-5e26-46e3-a328-38c8640859ac",
+                "street": "Birch Boulevard",
+                "number": "7039"
+            },
+            "img": {
+                "src": "/8.jpg",
+                "alt": "Profile picture",
+                "id": "085eb505-3259-44f2-a8bf-e6e6fd90f040"
+            }
+        },
+        "courier": "AliExpress",
+        "arrivedIn": "2024-12-13T11:39:51.029273",
+        "location": "Security desk",
+        "status": "picked up"
+    },
+    {
+        "id": "ad253702-b6c3-4f76-ac1c-6829a2d5c9be",
+        "resident": {
+            "id": "9783004b-6935-4c2d-9d6a-924b4cc4a80b",
+            "name": "Olivia Harris",
+            "unit": {
+                "id": "603fdc49-e194-4761-8ac1-7d9c18fa7031",
+                "street": "Elm Street",
+                "number": "4862"
+            },
+            "img": {
+                "src": "/7.jpg",
+                "alt": "Profile picture",
+                "id": "a50c1249-17e5-42db-ba18-db4416769190"
+            }
+        },
+        "courier": "Aramex",
+        "arrivedIn": "2025-01-08T11:39:51.029280",
+        "location": "Security desk",
+        "status": "picked up"
+    },
+    {
+        "id": "0efe4d39-b995-4740-b1ac-b337e6787074",
+        "resident": {
+            "id": "d635aa28-b2a7-40f0-bade-577f37be6c4e",
+            "name": "Olivia Johnson",
+            "unit": {
+                "id": "d93303c1-1435-4389-8812-56f381721c08",
+                "street": "Willow Drive",
+                "number": "4561"
+            },
+            "img": {
+                "src": "/6.jpg",
+                "alt": "Profile picture",
+                "id": "0c24803a-ab2f-43cb-9f86-d45d8fb20d2d"
+            }
+        },
+        "courier": "Hermes",
+        "arrivedIn": "2025-01-09T11:39:51.029287",
+        "location": "Parcel locker #1",
+        "status": "pending"
+    },
+    {
+        "id": "22e4a1a8-5523-4ef9-b856-7528dee27a8d",
+        "resident": {
+            "id": "1c571baf-f8a1-497d-83e8-2e254f3d0d90",
+            "name": "John Smith",
+            "unit": {
+                "id": "958a51a9-cccd-48e8-898c-31fdc0d30287",
+                "street": "Willow Drive",
+                "number": "4712"
+            },
+            "img": {
+                "src": "/2.jpg",
+                "alt": "Profile picture",
+                "id": "fd09ccd5-7177-4079-94bf-74ccbb3579a7"
+            }
+        },
+        "courier": "GLS",
+        "arrivedIn": "2024-12-21T11:39:51.029298",
+        "location": "Parcel locker #2",
+        "status": "picked up"
+    },
+    {
+        "id": "f30817b0-2cf9-4546-ac25-592f4d80e036",
+        "resident": {
+            "id": "b6c48303-955f-4f79-a74a-3d0e016832d1",
+            "name": "Olivia Thomas",
+            "unit": {
+                "id": "106cf57f-a649-4b6e-a102-cc5155b14227",
+                "street": "Oak Street",
+                "number": "5301"
+            },
+            "img": {
+                "src": "/2.jpg",
+                "alt": "Profile picture",
+                "id": "ec53ae1f-1f20-496d-828e-35e98e2249a9"
+            }
+        },
+        "courier": "Yodel",
+        "arrivedIn": "2025-01-02T11:39:51.029306",
+        "location": "Bench in the waiting area",
+        "status": "pending"
+    },
+    {
+        "id": "c67de17f-9cd2-4b39-92ff-8c3883e07fca",
+        "resident": {
+            "id": "7dadc689-3316-45fd-a106-fdfd9ca20b0b",
+            "name": "Jane Taylor",
+            "unit": {
+                "id": "2b33b349-b27e-4966-93bc-c1ab3953946f",
+                "street": "Oak Street",
+                "number": "6807"
+            },
+            "img": {
+                "src": "/3.jpg",
+                "alt": "Profile picture",
+                "id": "4016f6d1-f204-4c2a-aeac-84f760615f28"
+            }
+        },
+        "courier": "TNT",
+        "arrivedIn": "2024-12-19T11:39:51.029413",
+        "location": "Corner near the elevator",
+        "status": "pending"
+    },
+    {
+        "id": "6bda5656-835b-4405-aff5-885ffcb22892",
+        "resident": {
+            "id": "433538b8-58b7-4eaf-8864-af548ef2ab95",
+            "name": "Emma White",
+            "unit": {
+                "id": "356b564f-8f0b-42ca-9183-8e2e8181387a",
+                "street": "Main Street",
+                "number": "5457"
+            },
+            "img": {
+                "src": "/8.jpg",
+                "alt": "Profile picture",
+                "id": "acb9491f-2a4a-44a9-9013-d890ab39d51c"
+            }
+        },
+        "courier": "UPS",
+        "arrivedIn": "2024-12-26T11:39:51.029423",
+        "location": "Behind the reception counter",
+        "status": "picked up"
+    },
+    {
+        "id": "62612102-b029-4ac6-b0fe-870e7685aa53",
+        "resident": {
+            "id": "a4341099-55a9-4fb3-bcac-630a2ea8f8bc",
+            "name": "Robert Johnson",
+            "unit": {
+                "id": "054aa4e8-310b-4da5-8231-054d7a09ef50",
+                "street": "Elm Street",
+                "number": "7967"
+            },
+            "img": {
+                "src": "/2.jpg",
+                "alt": "Profile picture",
+                "id": "2d1f59c9-3744-4a44-a37d-35569d4c6fc5"
+            }
+        },
+        "courier": "Ebay",
+        "arrivedIn": "2025-01-07T11:39:51.029430",
+        "location": "Reception desk",
+        "status": "pending"
+    },
+    {
+        "id": "a00b9f0a-58f0-4d90-a9ec-fc519dfe22f2",
+        "resident": {
+            "id": "67315625-a8ba-4988-a5ce-e1151d648ee3",
+            "name": "James Smith",
+            "unit": {
+                "id": "4dcf3a2c-17f8-4043-8389-79213393267e",
+                "street": "Main Street",
+                "number": "975"
+            },
+            "img": {
+                "src": "/4.jpg",
+                "alt": "Profile picture",
+                "id": "78db5b60-0bfd-457a-a2f4-d10d819aedda"
+            }
+        },
+        "courier": "Canada Post",
+        "arrivedIn": "2024-12-28T11:39:51.029436",
+        "location": "Parcel locker #2",
+        "status": "pending"
+    },
+    {
+        "id": "c60fc84c-3ce8-4b02-a7b0-24ba6a94ae61",
+        "resident": {
+            "id": "33efe75f-2f15-460f-af05-ef37ab5e1219",
+            "name": "Emma Brown",
+            "unit": {
+                "id": "94cf978f-c83e-4fe9-9109-b73053992421",
+                "street": "Oak Street",
+                "number": "1164"
+            },
+            "img": {
+                "src": "/2.jpg",
+                "alt": "Profile picture",
+                "id": "bc3c5f5f-a72d-4c33-89c6-98450b817056"
+            }
+        },
+        "courier": "La Poste",
+        "arrivedIn": "2024-12-12T11:39:51.029442",
+        "location": "Security desk",
+        "status": "pending"
+    },
+    {
+        "id": "a07e0c58-4df1-425d-a0d1-0d8c50875077",
+        "resident": {
+            "id": "70d0c0ec-cbb0-4568-8774-de005273f454",
+            "name": "Emily Anderson",
+            "unit": {
+                "id": "fa1c5352-5e26-46e3-a328-38c8640859ac",
+                "street": "Birch Boulevard",
+                "number": "7039"
+            },
+            "img": {
+                "src": "/7.jpg",
+                "alt": "Profile picture",
+                "id": "ea727555-4d5d-4a60-8854-e145bfd0018f"
+            }
+        },
+        "courier": "UPS",
+        "arrivedIn": "2024-12-20T11:39:51.029449",
+        "location": "Parcel locker #1",
+        "status": "pending"
+    },
+    {
+        "id": "42d05489-999f-40d8-bb8f-5c9731832298",
+        "resident": {
+            "id": "e8494541-99bd-4fe5-96df-070a5bf4a509",
+            "name": "Sarah Taylor",
+            "unit": {
+                "id": "603fdc49-e194-4761-8ac1-7d9c18fa7031",
+                "street": "Elm Street",
+                "number": "4862"
+            },
+            "img": {
+                "src": "/5.jpg",
+                "alt": "Profile picture",
+                "id": "063eb5d2-1d29-41cf-b74e-7e558a3c39ef"
+            }
+        },
+        "courier": "FedEx",
+        "arrivedIn": "2025-01-05T11:39:51.029455",
+        "location": "Shelf C",
+        "status": "picked up"
+    }
+]
