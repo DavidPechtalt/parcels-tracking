@@ -46,7 +46,6 @@ export default function Parcels() {
   if (searchQuery.length > 1) {
     urlFilters = searchQuery[1].split("&");
   }
-  console.log(urlFilters);
   const { parcels, properties } = loaderData;
   const submit = useSubmit();
   function handleSubmit(e: FormEvent<HTMLFormElement>) {

@@ -9,13 +9,13 @@ export default parcels;
 export async function getParcels(filters: Filters) {
   const parcelsData = (
     await axios.get(`${process.env.DATASERVER_URL}/parcels`, { data: filters })
-  ).data as Parcel[];
+  ).data as Parcel[] | undefined;
 
   return parcelsData;
 }
 
 export function addParcel(parcel: Parcel) {
-  parcels.push(parcel);
+  axios.post(`${process.env.DATASERVER_URL}/parcels/new`, parcel)
 }
 
 export function pickParcel(parcelId: string) {
