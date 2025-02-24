@@ -33,3 +33,7 @@ type Filters struct {
 	Status    *string
 	Property  *string
 }
+
+type ParcelID struct {
+	ID string `json:"id"`
+}

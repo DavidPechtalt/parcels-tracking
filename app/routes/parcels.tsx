@@ -20,7 +20,7 @@ export async function action({ request }: ActionFunctionArgs) {
   if (!id || typeof id !== "string") {
     return Response.json({ error: "id issue" }, { status: 400 });
   }
-  if (!pickParcel(id)) {
+  if (!await pickParcel(id)) {
     return Response.json({ error: "wrong parcel id" }, { status: 400 });
   }
 

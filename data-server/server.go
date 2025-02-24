@@ -23,7 +23,7 @@ func getParcels(w http.ResponseWriter, req *http.Request) {
 		return
 	}
 	parcels = filterParcels(parcels, filters)
-	res, _ := toJSON[Parcel](parcels)
+	res, _ := toJSON(parcels)
 	w.Write(res)
 }
 func addParcel(w http.ResponseWriter, req *http.Request) {
@@ -41,7 +41,6 @@ func addParcel(w http.ResponseWriter, req *http.Request) {
 		http.Error(w, "bad request", http.StatusBadRequest)
 		return
 	}
-	fmt.Println(parcel)
 	parcels = append(parcels, parcel)
 	updatedData, err := json.Marshal(parcels)
 	if err != nil {
@@ -61,10 +60,51 @@ func addParcel(w http.ResponseWriter, req *http.Request) {
 
 }
 
+func pickParcel(w http.ResponseWriter, req *http.Request) {
+	data, _ := readJSONFile("../app/data/parcels.json")
+	parcels, _ := parseJSON[Parcel](data)
+	var id ParcelID
+	unParsedId, err := io.ReadAll(req.Body)
+
+	if err != nil {
+		http.Error(w, "bad request", http.StatusBadRequest)
+		return
+	}
+	err = json.Unmarshal(unParsedId, &id)
+	if err != nil {
+		http.Error(w, "bad request", http.StatusBadRequest)
+		return
+	}
+	idx := find(parcels, func(p Parcel) bool {
+		return p.ID == id.ID
+	})
+	if idx == -1 {
+		http.Error(w, "bad request", http.StatusBadRequest)
+		return
+	}
+	parcels[idx].Status = "picked up"
+	updatedData, err := json.Marshal(parcels)
+	if err != nil {
+		http.Error(w, "internal server error", http.StatusInternalServerError)
+		return
+	}
+
+	err = os.WriteFile("../app/data/parcels.json", updatedData, 0)
+	if err != nil {
+		http.Error(w, "internal server error", http.StatusInternalServerError)
+		return
+	}
+
+	w.WriteHeader(http.StatusOK)
+	w.Write([]byte("Parcel added successfully"))
+
+}
+
 func main() {
 
 	http.HandleFunc("/parcels", getParcels)
 
 	http.HandleFunc("/parcels/new", addParcel)
+	http.HandleFunc("/parcels/pick", pickParcel)
 	http.ListenAndServe(":8090", nil)
 }

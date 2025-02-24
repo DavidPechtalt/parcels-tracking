@@ -18,12 +18,12 @@ export function addParcel(parcel: Parcel) {
   axios.post(`${process.env.DATASERVER_URL}/parcels/new`, parcel)
 }
 
-export function pickParcel(parcelId: string) {
-  const index = parcels.findIndex((parcel) => parcel.id === parcelId);
-  if (index === -1) {
-    return false;
+export async function pickParcel(parcelId: string) {
+  
+  const res = await axios.post(`${process.env.DATASERVER_URL}/parcels/pick`, {id:parcelId})
+  if(res.status != 200){
+    return false
   }
-  parcels[index].status = "picked up";
   return true;
 }
 

@@ -71,3 +71,12 @@ func filter[T any](slice []T, predicate func(T) bool) []T {
 	}
 	return result
 }
+func find[T any](slice []T, predicate func(T) bool) int {
+
+	for idx, value := range slice {
+		if predicate(value) {
+			return idx
+		}
+	}
+	return -1
+}
