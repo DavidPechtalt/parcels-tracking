@@ -15,20 +15,24 @@ export async function getParcels(filters: Filters) {
 }
 
 export function addParcel(parcel: Parcel) {
-  axios.post(`${process.env.DATASERVER_URL}/parcels/new`, parcel)
+  axios.post(`${process.env.DATASERVER_URL}/parcels/new`, parcel);
 }
 
 export async function pickParcel(parcelId: string) {
-  
-  const res = await axios.post(`${process.env.DATASERVER_URL}/parcels/pick`, {id:parcelId})
-  if(res.status != 200){
-    return false
+  const res = await axios.post(`${process.env.DATASERVER_URL}/parcels/pick`, {
+    id: parcelId,
+  });
+  if (res.status != 200) {
+    return false;
   }
   return true;
 }
 
-export function findParcel(parcelId: string) {
-  return parcels.find((parcel) => parcel.id === parcelId);
+export async function findParcel(parcelId: string) {
+  const response = await axios.get(`${process.env.DATASERVER_URL}/parcels/find`, {
+    data: { id: parcelId },
+  });
+  return response.data
 }
 
 export function editParcel(parcel: Omit<Parcel, "status" | "arrivedIn">) {

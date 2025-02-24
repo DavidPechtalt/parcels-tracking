@@ -16,9 +16,9 @@ export async function action({ request }: ActionFunctionArgs) {
   return redirect("..");
 }
 
-export function loader({ params }: LoaderFunctionArgs) {
+export async function loader({ params }: LoaderFunctionArgs) {
   const parcelId = params.parcelId;
-  const parcel = findParcel(parcelId!);
+  const parcel =await findParcel(parcelId!);
 
   return parcel;
 }
