@@ -126,7 +126,46 @@ func pickParcel(w http.ResponseWriter, req *http.Request) {
 	w.Write([]byte("Parcel added successfully"))
 
 }
+func editParcel(w http.ResponseWriter, req *http.Request) {
+	data, _ := readJSONFile("../app/data/parcels.json")
+	parcels, _ := parseJSON[Parcel](data)
+	var parcel Parcel
+	unParsedParcel, err := io.ReadAll(req.Body)
 
+	if err != nil {
+		http.Error(w, "bad request", http.StatusBadRequest)
+		return
+	}
+	err = json.Unmarshal(unParsedParcel, &parcel)
+	if err != nil {
+		http.Error(w, "bad request", http.StatusBadRequest)
+		return
+	}
+	idx := find(parcels, func(p Parcel) bool {
+		return p.ID == parcel.ID
+	})
+	if idx == -1 {
+		http.Error(w, "bad request", http.StatusBadRequest)
+		return
+	}
+	parcel.Status = parcels[idx].Status
+	parcel.ArrivedIn = parcels[idx].ArrivedIn
+	parcels[idx] = parcel
+	updatedData, err := json.Marshal(parcels)
+	if err != nil {
+		http.Error(w, "internal server error", http.StatusInternalServerError)
+		return
+	}
+
+	err = os.WriteFile("../app/data/parcels.json", updatedData, 0)
+	if err != nil {
+		http.Error(w, "internal server error", http.StatusInternalServerError)
+		return
+	}
+
+	w.WriteHeader(http.StatusOK)
+	w.Write([]byte("Parcel edited successfully"))
+}
 func main() {
 
 	http.HandleFunc("/parcels", getParcels)
@@ -134,5 +173,6 @@ func main() {
 	http.HandleFunc("/parcels/find", findParcel)
 	http.HandleFunc("/parcels/new", addParcel)
 	http.HandleFunc("/parcels/pick", pickParcel)
+	http.HandleFunc("/parcels/edit", editParcel)
 	http.ListenAndServe(":8090", nil)
 }

@@ -29,21 +29,15 @@ export async function pickParcel(parcelId: string) {
 }
 
 export async function findParcel(parcelId: string) {
-  const response = await axios.get(`${process.env.DATASERVER_URL}/parcels/find`, {
-    data: { id: parcelId },
-  });
-  return response.data
+  const response = await axios.get(
+    `${process.env.DATASERVER_URL}/parcels/find`,
+    {
+      data: { id: parcelId },
+    }
+  );
+  return response.data;
 }
 
 export function editParcel(parcel: Omit<Parcel, "status" | "arrivedIn">) {
-  const parcelIndex = parcels.findIndex((p) => p.id === parcel.id);
-  if (parcelIndex === -1) {
-    return false;
-  }
-  const upadatedParcel: Parcel = {
-    ...parcel,
-    status: parcels[parcelIndex].status,
-    arrivedIn: parcels[parcelIndex].arrivedIn,
-  };
-  parcels[parcelIndex] = upadatedParcel;
+  axios.put(`${process.env.DATASERVER_URL}/parcels/edit`, parcel);
 }
