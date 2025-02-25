@@ -3,6 +3,8 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"net/http"
+
 	// "fmt"
 	"io"
 	"os"
@@ -79,4 +81,15 @@ func find[T any](slice []T, predicate func(T) bool) int {
 		}
 	}
 	return -1
+}
+func readBody[T any](req *http.Request, place *T) error {
+	data, err := io.ReadAll(req.Body)
+	if err != nil {
+		return err
+	}
+	err = json.Unmarshal(data, place)
+	if err != nil {
+		return err
+	}
+	return nil
 }

@@ -1,24 +1,23 @@
 package main
 
 import (
+	"context"
 	"encoding/json"
 	"fmt"
-	"io"
 	"net/http"
 	"os"
+	"os/signal"
+	"syscall"
+	"time"
 )
 
+var data, _ = readJSONFile("../app/data/parcels.json")
+var parcels, _ = parseJSON[Parcel](data)
+
 func getParcels(w http.ResponseWriter, req *http.Request) {
-	data, _ := readJSONFile("../app/data/parcels.json")
-	parcels, _ := parseJSON[Parcel](data)
+
 	var filters Filters
-	fil, err := io.ReadAll(req.Body)
-	if err != nil {
-		http.Error(w, "bad request", http.StatusBadRequest)
-		return
-	}
-	err = json.Unmarshal(fil, &filters)
-	if err != nil {
+	if err := readBody(req, &filters); err != nil {
 		http.Error(w, "bad request", http.StatusBadRequest)
 		return
 	}
@@ -26,18 +25,10 @@ func getParcels(w http.ResponseWriter, req *http.Request) {
 	res, _ := toJSON(parcels)
 	w.Write(res)
 }
-func findParcel(w http.ResponseWriter, req *http.Request) {
-	data, _ := readJSONFile("../app/data/parcels.json")
-	parcels, _ := parseJSON[Parcel](data)
-	var id ParcelID
-	unParsedId, err := io.ReadAll(req.Body)
 
-	if err != nil {
-		http.Error(w, "bad request", http.StatusBadRequest)
-		return
-	}
-	err = json.Unmarshal(unParsedId, &id)
-	if err != nil {
+func findParcel(w http.ResponseWriter, req *http.Request) {
+	var id ParcelID
+	if err := readBody(req, &id); err != nil {
 		http.Error(w, "bad request", http.StatusBadRequest)
 		return
 	}
@@ -53,52 +44,22 @@ func findParcel(w http.ResponseWriter, req *http.Request) {
 	w.Write(res)
 
 }
-func addParcel(w http.ResponseWriter, req *http.Request) {
-	data, _ := readJSONFile("../app/data/parcels.json")
-	parcels, _ := parseJSON[Parcel](data)
-	var parcel Parcel
-	unParsedParcel, err := io.ReadAll(req.Body)
 
-	if err != nil {
-		http.Error(w, "bad request", http.StatusBadRequest)
-		return
-	}
-	err = json.Unmarshal(unParsedParcel, &parcel)
-	if err != nil {
+func addParcel(w http.ResponseWriter, req *http.Request) {
+	var parcel Parcel
+	if err := readBody(req, &parcel); err != nil {
 		http.Error(w, "bad request", http.StatusBadRequest)
 		return
 	}
 	parcels = append(parcels, parcel)
-	updatedData, err := json.Marshal(parcels)
-	if err != nil {
-		http.Error(w, "internal server error", http.StatusInternalServerError)
-		return
-	}
-
-	err = os.WriteFile("../app/data/parcels.json", updatedData, 0)
-	if err != nil {
-		fmt.Println("Error writing the file")
-		http.Error(w, "internal server error", http.StatusInternalServerError)
-		return
-	}
-
 	w.WriteHeader(http.StatusOK)
 	w.Write([]byte("Parcel added successfully"))
 
 }
 
 func pickParcel(w http.ResponseWriter, req *http.Request) {
-	data, _ := readJSONFile("../app/data/parcels.json")
-	parcels, _ := parseJSON[Parcel](data)
 	var id ParcelID
-	unParsedId, err := io.ReadAll(req.Body)
-
-	if err != nil {
-		http.Error(w, "bad request", http.StatusBadRequest)
-		return
-	}
-	err = json.Unmarshal(unParsedId, &id)
-	if err != nil {
+	if err := readBody(req, &id); err != nil {
 		http.Error(w, "bad request", http.StatusBadRequest)
 		return
 	}
@@ -110,34 +71,13 @@ func pickParcel(w http.ResponseWriter, req *http.Request) {
 		return
 	}
 	parcels[idx].Status = "picked up"
-	updatedData, err := json.Marshal(parcels)
-	if err != nil {
-		http.Error(w, "internal server error", http.StatusInternalServerError)
-		return
-	}
-
-	err = os.WriteFile("../app/data/parcels.json", updatedData, 0)
-	if err != nil {
-		http.Error(w, "internal server error", http.StatusInternalServerError)
-		return
-	}
-
 	w.WriteHeader(http.StatusOK)
 	w.Write([]byte("Parcel added successfully"))
 
 }
 func editParcel(w http.ResponseWriter, req *http.Request) {
-	data, _ := readJSONFile("../app/data/parcels.json")
-	parcels, _ := parseJSON[Parcel](data)
 	var parcel Parcel
-	unParsedParcel, err := io.ReadAll(req.Body)
-
-	if err != nil {
-		http.Error(w, "bad request", http.StatusBadRequest)
-		return
-	}
-	err = json.Unmarshal(unParsedParcel, &parcel)
-	if err != nil {
+	if err := readBody(req, &parcel); err != nil {
 		http.Error(w, "bad request", http.StatusBadRequest)
 		return
 	}
@@ -151,28 +91,48 @@ func editParcel(w http.ResponseWriter, req *http.Request) {
 	parcel.Status = parcels[idx].Status
 	parcel.ArrivedIn = parcels[idx].ArrivedIn
 	parcels[idx] = parcel
-	updatedData, err := json.Marshal(parcels)
-	if err != nil {
-		http.Error(w, "internal server error", http.StatusInternalServerError)
-		return
-	}
-
-	err = os.WriteFile("../app/data/parcels.json", updatedData, 0)
-	if err != nil {
-		http.Error(w, "internal server error", http.StatusInternalServerError)
-		return
-	}
 
 	w.WriteHeader(http.StatusOK)
 	w.Write([]byte("Parcel edited successfully"))
 }
 func main() {
+	// Create a new server
+	server := &http.Server{Addr: ":8090"}
 
+	// Set up HTTP handlers
 	http.HandleFunc("/parcels", getParcels)
-
 	http.HandleFunc("/parcels/find", findParcel)
 	http.HandleFunc("/parcels/new", addParcel)
 	http.HandleFunc("/parcels/pick", pickParcel)
 	http.HandleFunc("/parcels/edit", editParcel)
-	http.ListenAndServe(":8090", nil)
+
+	// Start the server in a goroutine
+	go func() {
+		if err := server.ListenAndServe(); err != nil && err != http.ErrServerClosed {
+			fmt.Printf("ListenAndServe(): %s\n", err)
+		}
+	}()
+	fmt.Println("Server is running on port 8090")
+
+	// Create a channel to listen for interrupt signals
+	stop := make(chan os.Signal, 1)
+	signal.Notify(stop, os.Interrupt, syscall.SIGTERM)
+
+	// Wait for an interrupt signal
+	<-stop
+	fmt.Println("Received interrupt signal")
+
+	// Create a context with a timeout for the shutdown
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	defer cancel()
+	// Updating the data before shooting the server
+	updatedData, _ := json.Marshal(parcels)
+	os.WriteFile("../app/data/parcels.json", updatedData, 0)
+	fmt.Println("Data Updated")
+	// Attempt to gracefully shut down the server
+	fmt.Println("Shutting down the server...")
+	if err := server.Shutdown(ctx); err != nil {
+		fmt.Printf("Server Shutdown: %s\n", err)
+	}
+	fmt.Println("Server gracefully stopped")
 }
