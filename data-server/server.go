@@ -21,8 +21,7 @@ func getParcels(w http.ResponseWriter, req *http.Request) {
 		http.Error(w, "bad request", http.StatusBadRequest)
 		return
 	}
-	parcels = filterParcels(parcels, filters)
-	res, _ := toJSON(parcels)
+	res, _ := toJSON(filterParcels(parcels, filters))
 	w.Write(res)
 }
 
@@ -125,7 +124,7 @@ func main() {
 	// Create a context with a timeout for the shutdown
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
-	// Updating the data before shooting the server
+	// Updating the data before shutting the server
 	updatedData, _ := json.Marshal(parcels)
 	os.WriteFile("../app/data/parcels.json", updatedData, 0)
 	fmt.Println("Data Updated")

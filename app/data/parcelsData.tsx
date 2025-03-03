@@ -1,10 +1,6 @@
-import data from "./parcels.json";
 import { Parcel } from "../types/parcel";
 import { Filters } from "~/types/fitlers";
 import axios from "axios";
-
-const parcels = data as Parcel[];
-export default parcels;
 
 export async function getParcels(filters: Filters) {
   const parcelsData = (
