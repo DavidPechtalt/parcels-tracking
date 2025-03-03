@@ -215,11 +215,11 @@ export function Table({ parcels }: { parcels: Parcel[] }) {
         <div className="flex items-center min-w-[214px] ">
           <div className="w-[100%]">Arrived on</div>
         </div>
-        <div className="flex ml-9 items-center min-w-[214px] ">
+        <div className="flex ml-9 items-center min-w-[190px] ">
           <div className="w-[100%]">Status</div>
         </div>
-        <div className="flex items-center min-w-[200px] ">
-          <div className="w-[100%]">Pick</div>
+        <div className="flex items-center min-w-[224px] ">
+          <div className="w-[100%]">Set As Picked</div>
         </div>
         <div className="flex items-center  min-w-[114px]">
           <div className="w-[100%]">Edit</div>
@@ -237,7 +237,7 @@ export function Table({ parcels }: { parcels: Parcel[] }) {
 export function TableRow({ parcel }: { parcel: Parcel }) {
   const fetcher = useFetcher();
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
-    if (!confirm("Are you picking the package?")) {
+    if (!confirm("Set this package as picked-up?")) {
       e.preventDefault();
     }
   }
