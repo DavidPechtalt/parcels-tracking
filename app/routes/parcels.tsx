@@ -13,6 +13,7 @@ import {
 import { FormEvent } from "react";
 import { ActionFunctionArgs, LoaderFunctionArgs } from "@remix-run/node";
 import { getParcels, pickParcel } from "~/data/parcelsData";
+import { formatDate } from "~/utils/formatDate";
 
 export async function action({ request }: ActionFunctionArgs) {
   const data = await request.formData();
@@ -20,7 +21,7 @@ export async function action({ request }: ActionFunctionArgs) {
   if (!id || typeof id !== "string") {
     return Response.json({ error: "id issue" }, { status: 400 });
   }
-  if (!await pickParcel(id)) {
+  if (!(await pickParcel(id))) {
     return Response.json({ error: "wrong parcel id" }, { status: 400 });
   }
 
@@ -261,8 +262,12 @@ export function TableRow({ parcel }: { parcel: Parcel }) {
       <div className="flex items-center  min-w-[150px] ml-8">
         {parcel.courier}
       </div>
-      <div className="flex items-center  min-w-[214px]">
-        {parcel.arrivedIn.split("T")[0]}
+      <div className="flex flex-col space-y-2  min-w-[214px]">
+        {formatDate(parcel.arrivedIn)
+          .split(",")
+          .map((str) => (
+            <div key={str}>{str}</div>
+          ))}
       </div>
       <div className="flex items-center ml-9  min-w-[214px]">
         <div
