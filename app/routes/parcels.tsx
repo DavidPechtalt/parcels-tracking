@@ -113,10 +113,10 @@ export default function Parcels() {
                   end date
                 </label>
                 <input
-                  defaultValue={
+                  value={
                     urlFilters
                       ?.find((s) => s.includes("end-date"))
-                      ?.split("=")[1]
+                      ?.split("=")[1]||""
                   }
                   name="end-date"
                   id="end-date"
@@ -135,11 +135,11 @@ export default function Parcels() {
                   status
                 </div>
                 <select
-                  defaultValue={urlFilters
+                  value={urlFilters
                     ?.find((s) => s.includes("status"))
                     ?.split("=")[1]
                     ?.split("+")
-                    ?.join(" ")}
+                    ?.join(" ")|| ""}
                   className="rounded-lg w-40 px-2 h-8"
                   onChange={(e) => e.target.form?.requestSubmit()}
                   name="status"
@@ -155,11 +155,11 @@ export default function Parcels() {
               <div className="flex flex-col">
                 <div className="text-white text-sm mb-1 ml-2">property</div>
                 <select
-                  defaultValue={urlFilters
+                  value={urlFilters
                     ?.find((s) => s.includes("property"))
                     ?.split("=")[1]
                     ?.split("+")
-                    ?.join(" ")}
+                    ?.join(" ")||""}
                   className="rounded-lg w-40 px-2 h-8"
                   onChange={(e) => e.target.form?.requestSubmit()}
                   name="property"
