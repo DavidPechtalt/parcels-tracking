@@ -269,6 +269,7 @@ export function TableRow({ parcel }: { parcel: Parcel }) {
             <div key={str}>{str}</div>
           ))}
       </div>
+      
       <div className="flex items-center ml-9  min-w-[214px]">
         <div
           className={`rounded-xl w-24 flex justify-center  ${
@@ -285,13 +286,14 @@ export function TableRow({ parcel }: { parcel: Parcel }) {
             name="status-id"
             value={parcel.id}
             disabled={parcel.status === "picked up"}
-            className="disabled:opacity-50"
+            className="disabled:opacity-50 "
+            title={parcel.status === "picked up"?"":"Set as picked"}
           >
             <img alt="v" src="/vee.png" className="h-8  rounded-full "></img>
           </button>
         </fetcher.Form>{" "}
       </div>
-      <div className="flex items-center min-w-[200px]">
+      <div className="flex items-center min-w-[200px]" title="edit">
         <Link to={`./${parcel.id}/edit`}>Edit</Link>
       </div>
     </div>
