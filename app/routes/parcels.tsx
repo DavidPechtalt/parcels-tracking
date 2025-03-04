@@ -10,7 +10,7 @@ import {
   useLocation,
   useSubmit,
 } from "@remix-run/react";
-import { FormEvent } from "react";
+import { FormEvent, useState } from "react";
 import { ActionFunctionArgs, LoaderFunctionArgs } from "@remix-run/node";
 import { getParcels, pickParcel } from "~/data/parcelsData";
 import { formatDate } from "~/utils/formatDate";
@@ -51,7 +51,6 @@ export default function Parcels() {
   const submit = useSubmit();
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-
     const formData = new FormData(e.currentTarget);
 
     for (const [key, value] of formData.entries()) {
@@ -92,10 +91,10 @@ export default function Parcels() {
                   start date
                 </label>
                 <input
-                  defaultValue={
+                  value={
                     urlFilters
                       ?.find((s) => s.includes("start-date"))
-                      ?.split("=")[1]
+                      ?.split("=")[1] || ""
                   }
                   name="start-date"
                   id="start-date"
@@ -197,6 +196,7 @@ export default function Parcels() {
 }
 
 export function Table({ parcels }: { parcels: Parcel[] }) {
+  const [order, setOrder] = useState<"acs" | "dec">("acs");
   return (
     <div className="max-w-[90%]   overflow-x-auto flex flex-col  scrollbar py-2 ">
       <div className="min-w-[1650px] flex w-[1450px] min-h-14 h-14 px-4  mb-4 rounded-lg text-white text-lg bg-black">
@@ -214,7 +214,15 @@ export function Table({ parcels }: { parcels: Parcel[] }) {
           <div className="w-[100%]">Courier</div>
         </div>
         <div className="flex items-center min-w-[214px] ">
-          <div className="w-[100%]">Arrived on</div>
+          <div className="w-[100%]">
+            <button
+              onClick={() => {
+                order === "acs" ? setOrder("dec") : setOrder("acs");
+              }}
+            >
+              Arrived on &nbsp; {order === "acs" ? "↑" : "↓"}
+            </button>
+          </div>
         </div>
         <div className="flex ml-9 items-center min-w-[190px] ">
           <div className="w-[100%]">Status</div>
@@ -227,9 +235,17 @@ export function Table({ parcels }: { parcels: Parcel[] }) {
         </div>
       </div>
       <div className=" w-fit overflow-y-auto scrollbar flex-grow">
-        {parcels.map((parcel) => {
-          return <TableRow key={parcel.id} parcel={parcel} />;
-        })}
+        {parcels
+          .sort((a, b) =>
+            order === "acs"
+              ? new Date(a.arrivedIn).getTime() -
+                new Date(b.arrivedIn).getTime()
+              : new Date(b.arrivedIn).getTime() -
+                new Date(a.arrivedIn).getTime()
+          )
+          .map((parcel) => {
+            return <TableRow key={parcel.id} parcel={parcel} />;
+          })}
       </div>
     </div>
   );
@@ -269,7 +285,7 @@ export function TableRow({ parcel }: { parcel: Parcel }) {
             <div key={str}>{str}</div>
           ))}
       </div>
-      
+
       <div className="flex items-center ml-9  min-w-[214px]">
         <div
           className={`rounded-xl w-24 flex justify-center  ${
@@ -287,7 +303,7 @@ export function TableRow({ parcel }: { parcel: Parcel }) {
             value={parcel.id}
             disabled={parcel.status === "picked up"}
             className="disabled:opacity-50 "
-            title={parcel.status === "picked up"?"":"Set as picked"}
+            title={parcel.status === "picked up" ? "" : "Set as picked"}
           >
             <img alt="v" src="/vee.png" className="h-8  rounded-full "></img>
           </button>
