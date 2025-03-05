@@ -75,15 +75,20 @@ func pickParcel(w http.ResponseWriter, req *http.Request) {
 
 }
 func editParcel(w http.ResponseWriter, req *http.Request) {
+
 	var parcel Parcel
+	
 	if err := readBody(req, &parcel); err != nil {
+		fmt.Println(err," 80")
 		http.Error(w, "bad request", http.StatusBadRequest)
 		return
 	}
+    fmt.Println(parcel)
 	idx := find(parcels, func(p Parcel) bool {
 		return p.ID == parcel.ID
 	})
 	if idx == -1 {
+		fmt.Println(" 90")
 		http.Error(w, "bad request", http.StatusBadRequest)
 		return
 	}

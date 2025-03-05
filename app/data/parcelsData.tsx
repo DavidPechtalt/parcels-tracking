@@ -34,6 +34,7 @@ export async function findParcel(parcelId: string) {
   return response.data;
 }
 
-export function editParcel(parcel: Omit<Parcel, "status" | "arrivedIn">) {
+export function editParcel(parcel: Omit<Parcel, "status" | "arrivedIn"|"id">) {
+  console.log(parcel)
   axios.put(`${process.env.DATASERVER_URL}/parcels/edit`, parcel);
 }

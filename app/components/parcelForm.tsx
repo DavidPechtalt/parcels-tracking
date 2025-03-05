@@ -4,7 +4,6 @@ import { residentsNames } from "~/data/residentsData";
 
 import { isParcelCourier, parcelCourierArr } from "~/types/parcelCourier";
 import { isParcelLocation, parcelLocationsArr } from "~/types/parcelLocation";
-import { v4 as uuidv4 } from "uuid";
 import { Parcel } from "~/types/parcel";
 import { ParcelFormError } from "~/types/parcelFormError";
 
@@ -62,19 +61,21 @@ export default function ParcelForm({ parcelData }: { parcelData?: Parcel }) {
         </div>
         <div className="flex flex-col p-5">
           <Form method="post" onSubmit={handleSubmit}>
+            <div className="hidden">
+              <input name="id" value={parcelData?.id}></input>
+            </div>
             <div className="mb-8">
               {" "}
-              <label htmlFor="id" className="block text-sm mb-2">
+              <label htmlFor="displayId" className="block text-sm mb-2">
                 <span className="text-xs">*</span>ID
               </label>
               <input
-                name="id"
-                id="id"
+                name="displayId"
+                id="displayId"
                 type="text"
                 required
                 className="border border-gray-400 rounded-md h-8 w-[100%] px-2"
-                readOnly
-                value={parcelData ? parcelData.id : uuidv4()}
+                defaultValue={ parcelData?.displayId }
               />
             </div>
             <div className="mb-8">

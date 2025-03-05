@@ -2,7 +2,6 @@ import { ActionFunctionArgs, LoaderFunctionArgs } from "@remix-run/node";
 import { redirect, useLoaderData } from "@remix-run/react";
 import ParcelForm from "~/components/parcelForm";
 import { editParcel, findParcel } from "~/data/parcelsData";
-import { Parcel } from "~/types/parcel";
 import getParcelFormVal from "~/utils/getParcelForm";
 
 export async function action({ request }: ActionFunctionArgs) {
@@ -11,14 +10,14 @@ export async function action({ request }: ActionFunctionArgs) {
   if (typeof results === "string") {
     return Response.json({ error: results }, { status: 400 });
   }
-  editParcel(results as Omit<Parcel, "arrivedIn" | "status">);
+  editParcel(results);
 
   return redirect("..");
 }
 
 export async function loader({ params }: LoaderFunctionArgs) {
   const parcelId = params.parcelId;
-  const parcel =await findParcel(parcelId!);
+  const parcel = await findParcel(parcelId!);
 
   return parcel;
 }

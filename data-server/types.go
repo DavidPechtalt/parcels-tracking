@@ -7,6 +7,7 @@ type Parcel struct {
 	ArrivedIn string   `json:"arrivedIn"`
 	Location  string   `json:"location"`
 	Status    string   `json:"status"`
+	DisplayId string `json:"displayId"`
 }
 
 type Resident struct {

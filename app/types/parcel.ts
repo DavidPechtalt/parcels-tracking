@@ -4,6 +4,7 @@ import { ParcelStatus } from "./parcelStatus";
 import { Resident } from "./resident";
 
 export interface Parcel {
+  displayId:string;
   id: string;
   resident: Resident;
   courier: ParcelCourier;

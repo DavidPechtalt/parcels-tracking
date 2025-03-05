@@ -1,18 +1,22 @@
 import { getResidentByName } from "~/data/residentsData";
+import { Parcel } from "~/types/parcel";
 import { isParcelCourier } from "~/types/parcelCourier";
 import { ParcelFormError } from "~/types/parcelFormError";
 import { isParcelLocation } from "~/types/parcelLocation";
 import { Resident } from "~/types/resident";
 
-export default function getParcelFormVal(formData: FormData) {
-  const id = formData.get("id");
+export default function getParcelFormVal(
+  formData: FormData
+): Omit<Parcel, "status" | "arrivedIn"> | ParcelFormError {
+  const displayId = formData.get("displayId");
   const courier = formData.get("courier");
   const location = formData.get("location");
   const notes = formData.get("notes");
   const residentName = formData.get("resident");
+  const id = formData.get("id") || undefined;
   let error: ParcelFormError | undefined;
   if (
-    typeof id !== "string" ||
+    typeof displayId !== "string" ||
     typeof courier !== "string" ||
     typeof location !== "string" ||
     typeof notes !== "string" ||
@@ -33,9 +37,10 @@ export default function getParcelFormVal(formData: FormData) {
   resident = resident as Resident;
   return {
     id,
-    courier,
-    location,
     notes,
     resident,
-  };
+    courier,
+    location,
+    displayId,
+  } as Omit<Parcel, "status" | "arrivedIn">;
 }
