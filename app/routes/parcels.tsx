@@ -12,7 +12,7 @@ import {
 } from "@remix-run/react";
 import { FormEvent, useState } from "react";
 import { ActionFunctionArgs, LoaderFunctionArgs } from "@remix-run/node";
-import { getParcels, pickParcel } from "~/data/parcelsData";
+import { getParcels, setAsPicked as setAsPicked } from "~/data/parcelsData";
 import { formatDate } from "~/utils/formatDate";
 
 export async function action({ request }: ActionFunctionArgs) {
@@ -21,7 +21,7 @@ export async function action({ request }: ActionFunctionArgs) {
   if (!id || typeof id !== "string") {
     return Response.json({ error: "id issue" }, { status: 400 });
   }
-  if (!(await pickParcel(id))) {
+  if (!(await setAsPicked(id))) {
     return Response.json({ error: "wrong parcel id" }, { status: 400 });
   }
 

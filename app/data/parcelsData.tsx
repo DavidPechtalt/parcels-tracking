@@ -14,7 +14,7 @@ export function addParcel(parcel: Parcel) {
   axios.post(`${process.env.DATASERVER_URL}/parcels/new`, parcel);
 }
 
-export async function pickParcel(parcelId: string) {
+export async function setAsPicked(parcelId: string) {
   const res = await axios.post(`${process.env.DATASERVER_URL}/parcels/pick`, {
     id: parcelId,
   });
