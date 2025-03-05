@@ -153,7 +153,7 @@ export default function Parcels() {
             <div>
               {" "}
               <div className="flex flex-col">
-                <div className="text-white text-sm mb-1 ml-2">property</div>
+                <div className="text-white text-sm mb-1 ml-2">address</div>
                 <select
                   value={urlFilters
                     ?.find((s) => s.includes("property"))
@@ -164,7 +164,7 @@ export default function Parcels() {
                   onChange={(e) => e.target.form?.requestSubmit()}
                   name="property"
                 >
-                  <option value="">--building--</option>
+                  <option value="">--address--</option>
                   {properties.map((property) => {
                     return (
                       <option key={property} value={property}>
@@ -205,7 +205,7 @@ export function Table({ parcels }: { parcels: Parcel[] }) {
           <div className="w-[100%]">Resident</div>
         </div>
         <div className="flex items-center min-w-[214px] ">
-          <div className="w-[100%]">Property/Unit</div>
+          <div className="w-[100%]">Address</div>
         </div>
         <div className="flex ml-6 items-center min-w-[214px] ">
           <div className="w-[100%] ">ID</div>
